@@ -9,12 +9,14 @@ public class GamePanel extends JPanel implements Runnable{
     Thread gameThread;
     PlayManager playmanager;
     Background background;
+    Enemy enemy;
     public GamePanel(){
         this.setPreferredSize(new Dimension(WIDTH, HEIGHT));
         this.setLayout(null);
 
         playmanager = new PlayManager();
         background = new Background();
+        enemy = new Enemy();
     }
 
     public void launchGame(){
@@ -46,6 +48,7 @@ public class GamePanel extends JPanel implements Runnable{
     }
     public void update(){
         playmanager.update();
+        enemy.update();
     }
     public void paintComponent(Graphics graphics) {
         super.paintComponent(graphics);
@@ -53,6 +56,7 @@ public class GamePanel extends JPanel implements Runnable{
         Graphics2D graphics2D = (Graphics2D) graphics;
         playmanager.draw(graphics2D);
         background.draw(graphics2D);
+        enemy.draw(graphics2D);
 
     }
 }
