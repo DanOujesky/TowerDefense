@@ -48,7 +48,9 @@ public class GamePanel extends JPanel implements Runnable{
     }
     public void update(){
         playmanager.update();
-        enemy.update();
+        if (enemy.isDeath() == false) {
+            enemy.update();
+        }
     }
     public void paintComponent(Graphics graphics) {
         super.paintComponent(graphics);
@@ -56,7 +58,10 @@ public class GamePanel extends JPanel implements Runnable{
         Graphics2D graphics2D = (Graphics2D) graphics;
         playmanager.draw(graphics2D);
         background.draw(graphics2D);
-        enemy.draw(graphics2D);
+        if (enemy.isDeath() == false) {
+            enemy.draw(graphics2D);
+        }
+
 
     }
 }
