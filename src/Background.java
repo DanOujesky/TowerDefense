@@ -2,7 +2,7 @@ import java.awt.*;
 import java.awt.image.BufferedImage;
 
 public class Background {
-    private static final int TILESIZE = 60;
+    public static final int TILESIZE = 60;
     private static final int columnLenght = TILESIZE / 4;
     public void draw(Graphics2D graphics2D) {
 
@@ -46,10 +46,10 @@ public class Background {
         }
         return tilePosition * TILESIZE;
     }
-    public static boolean isNextDirt(int x, int y, int direction){
+    public static boolean isNextDirt(double x, double y, int direction){
         boolean trueFalse = true;
-        int tileX = y/TILESIZE;
-        int tileY = x/TILESIZE;
+        int tileX = (int) Math.round(y/TILESIZE);
+        int tileY = (int) Math.round(x/TILESIZE);
         switch (direction) {
             case 1:
                 if (backgroundEditor[tileX][tileY+1] != 2) {
@@ -74,6 +74,7 @@ public class Background {
         }
         return trueFalse;
     }
+
 
 
 
