@@ -3,45 +3,46 @@ import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
+import java.security.spec.ECField;
+import java.util.ArrayList;
+import java.util.concurrent.Callable;
 
 public class Enemy {
     private double x,y;
     private boolean death = false;
-    final static double movementSpeed = 5;
+    double movementSpeed;
     private int direction;
-    final static BufferedImage ENEMY_1;
-
-    static {
+    private BufferedImage enemy;
+    private int enemyHealth;
+    private int damage;
+    private int earnings;
+    public Enemy(File file, int enemyHealth, int movementSpeed, int damage, int earnings){
         try {
-            ENEMY_1 = ImageIO.read(new File("pictures/Enemies/Enemy_1.png"));
+            enemy = ImageIO.read(file);
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
-    }
-    public Enemy(){
+        this.enemyHealth = enemyHealth;
+        this.movementSpeed = movementSpeed;
+        this.damage = damage;
+        this.earnings = earnings;
         x = -Background.TILESIZE;
         y = Background.positionOfFirstTile();
         direction = 1;
-        spawn();
-    }
-    public void spawn(){
-        while (x == 0) {
-            update();
-        }
     }
     public void draw(Graphics2D graphics2D) {
         switch (direction) {
             case 1:
-                graphics2D.drawImage(rotateImage(ENEMY_1, 0), (int) x, (int) y, null);
+                graphics2D.drawImage(rotateImage(enemy, 0), (int) x, (int) y, null);
                 break;
             case 2:
-                graphics2D.drawImage(rotateImage(ENEMY_1, 270), (int) x, (int) y, null);
+                graphics2D.drawImage(rotateImage(enemy, 270), (int) x, (int) y, null);
                 break;
             case 3:
-                graphics2D.drawImage(rotateImage(ENEMY_1, 180),(int) x, (int) y, null);
+                graphics2D.drawImage(rotateImage(enemy, 180), (int) x, (int) y, null);
                 break;
             case 4:
-                graphics2D.drawImage(rotateImage(ENEMY_1, 90), (int) x, (int) y, null);
+                graphics2D.drawImage(rotateImage(enemy, 90), (int) x, (int) y, null);
                 break;
         }
     }
@@ -61,12 +62,17 @@ public class Enemy {
                 y += movementSpeed;
                 break;
         }
-        if (x < GamePanel.WIDTH - Background.TILESIZE * 1.5) {
+        if (x > -1 && x < GamePanel.WIDTH - Background.TILESIZE * 1.5) {
             if (!Background.isNextDirt(x, y, direction) && x % Background.TILESIZE == 0 && y % Background.TILESIZE == 0) {
                 chooseDirection();
             }
-        } else if (x > (GamePanel.WIDTH - ENEMY_1.getWidth() + Background.TILESIZE)) {
+        } else if (x > (GamePanel.WIDTH - enemy.getWidth() + Background.TILESIZE)) {
             death = true;
+            GamePanel.HEALTH -= damage;
+            System.out.println(GamePanel.HEALTH);
+        } else if (enemyHealth < 1) {
+            death = true;
+            GamePanel.COINS += earnings;
         }
     }
     private static BufferedImage rotateImage(BufferedImage buffImage, double angle) {
@@ -143,5 +149,7 @@ public class Enemy {
         }
 
     }
+
+
 
 }
