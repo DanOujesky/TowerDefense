@@ -1,16 +1,27 @@
+import javax.imageio.ImageIO;
 import javax.swing.*;
 import java.awt.*;
+import java.awt.image.BufferedImage;
+import java.io.File;
+import java.io.IOException;
 
 public class Tile {
 
-    final static ImageIcon GRASS = new ImageIcon("pictures/GRASS.png");
-    final static ImageIcon DIRT = new ImageIcon("pictures/DIRT.png");
+    final static BufferedImage GRASS;
+    final static BufferedImage DIRT;
 
-
-    public static Image getGRASS() {
-        return GRASS.getImage();
+    static {
+        try {
+            GRASS = ImageIO.read(new File("pictures/Tiles/GRASS.png"));
+            DIRT = ImageIO.read(new File("pictures/Tiles/DIRT.png"));
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
     }
-    public static Image getDIRT() {
-        return DIRT.getImage();
+    public static BufferedImage getGRASS() {
+        return GRASS;
+    }
+    public static BufferedImage getDIRT() {
+        return DIRT;
     }
 }
