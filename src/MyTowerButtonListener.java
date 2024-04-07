@@ -4,10 +4,10 @@ import java.awt.event.ActionListener;
 import java.io.File;
 
 
-public class MyButtonListener implements ActionListener {
+public class MyTowerButtonListener implements ActionListener {
     private double x,y, attackSpeed, damage, prize;
     File towerFile;
-    public MyButtonListener(double x, double y, double attackSpeed, double damage, double prize, File towerFile){
+    public MyTowerButtonListener(double x, double y, double attackSpeed, double damage, double prize, File towerFile){
         this.x = x;
         this.y = y;
         this.attackSpeed = attackSpeed;
