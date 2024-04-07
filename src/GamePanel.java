@@ -1,12 +1,9 @@
 import javax.imageio.ImageIO;
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.TimerTask;
 
 public class GamePanel extends JPanel implements Runnable{
 
@@ -20,19 +17,26 @@ public class GamePanel extends JPanel implements Runnable{
     Background background;
     private static ArrayList<Enemy> enemies = new ArrayList<>();
     private static ArrayList<Tower> towers = new ArrayList<>();
-    JButton myButton = new JButton("Button");
+    JButton myTowerButton = new JButton("Button");
+    static JButton myWaveButton = new JButton(new ImageIcon("pictures/Wave_icon/Wave_icon.png"));
     public GamePanel(){
         this.setPreferredSize(new Dimension(WIDTH, HEIGHT));
         this.setLayout(null);
         this.addMouseListener(new MyMouseListener());
         this.addMouseMotionListener(new MyMouseListener());
-        this.add(myButton);
+        this.add(myTowerButton);
+        this.add(myWaveButton);
 
         background = new Background();
-        myButton.setBounds(60, 750, 100, 100);
-        myButton.addActionListener(new MyButtonListener(0,0,5,5,10, new File("pictures/Towers/Tower_1.png")));
+        myTowerButton.setBounds(60, 750, 100, 100);
+        myWaveButton.setBounds(0,Background.positionOfFirstTile(), myWaveButton.getIcon().getIconWidth(), myWaveButton.getIcon().getIconHeight());
+        myWaveButton.setBorder(BorderFactory.createEmptyBorder());
+        myWaveButton.setContentAreaFilled(false);
+
+        myTowerButton.addActionListener(new MyTowerButtonListener(0,0,5,5,10, new File("pictures/Towers/Tower_1.png")));
+        myWaveButton.addActionListener(new MyWaveButtonListener());
     }
-    public void addEnemy(String name){
+    public static void addEnemy(String name){
         switch (name) {
             case "enemy1":
                 enemies.add(new Enemy(new File("pictures/Enemies/Enemy_1.png"), 10,2,1, 10));
@@ -73,33 +77,30 @@ public class GamePanel extends JPanel implements Runnable{
                 repaint();
                 delta--;
                 timer++;
-                if (timer % 65 == 0) {
-                    addEnemy("enemy1");
-                }
-                if (timer % 150 == 0 ) {
-                    addEnemy("enemy2");
-                }
-                if (timer > 300 && timer % 20 == 0) {
-                    addEnemy("enemy3");
-                }
                 if (HEALTH < 1) {
-                    gameThread.interrupt();
                     gameOver = true;
                 }
-
             }
         }
 
     }
     public void update(){
-        for (int i =0; i < enemies.size(); i++) {
-            if (enemies.get(i).isDeath() == true) {
-                enemies.remove(enemies.get(i));
+        if (!enemies.isEmpty()) {
+            for (int i =0; i < enemies.size(); i++) {
+                enemies.get(i).update();
+                if (enemies.get(i).isDeath() == true) {
+                    enemies.remove(enemies.get(i));
+                }
             }
-            enemies.get(i).update();
         }
-        for (int i =0; i < towers.size(); i++) {
-            towers.get(i).update();
+        if (!towers.isEmpty()) {
+            for (int i =0; i < towers.size(); i++) {
+                towers.get(i).update();
+            }
+        }
+
+        if (Waves.wave) {
+            Waves.update();
         }
 
     }
@@ -113,15 +114,15 @@ public class GamePanel extends JPanel implements Runnable{
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
-        for (int i =0; i < enemies.size(); i++) {
-            enemies.get(i).draw(graphics2D);
+        if (!enemies.isEmpty()) {
+            for (int i =0; i < enemies.size(); i++) {
+                enemies.get(i).draw(graphics2D);
+            }
         }
-        for (int i =0; i < towers.size(); i++) {
-            towers.get(i).update();
+        if (!towers.isEmpty()) {
+            for (int i =0; i < towers.size(); i++) {
+                towers.get(i).draw(graphics2D);
+            }
         }
-        for (int i =0; i < towers.size(); i++) {
-            towers.get(i).draw(graphics2D);
-        }
-
     }
 }
