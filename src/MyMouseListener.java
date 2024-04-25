@@ -7,6 +7,7 @@ public class MyMouseListener implements MouseListener, MouseMotionListener {
     public static double positionX;
     public static double positionY;
     public static boolean mousePressed;
+    public static boolean mouseEntered;
     @Override
     public void mouseClicked(MouseEvent e) {
 
@@ -24,12 +25,12 @@ public class MyMouseListener implements MouseListener, MouseMotionListener {
 
     @Override
     public void mouseEntered(MouseEvent e) {
-
+        mouseEntered = true;
     }
 
     @Override
     public void mouseExited(MouseEvent e) {
-
+        mouseEntered = false;
     }
 
     @Override
