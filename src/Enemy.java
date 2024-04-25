@@ -3,46 +3,45 @@ import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
-import java.security.spec.ECField;
-import java.util.ArrayList;
-import java.util.concurrent.Callable;
 
 public class Enemy {
     private double x,y;
     private boolean death = false;
     double movementSpeed;
+    private Rectangle enemyBounds;
     private int direction;
     private BufferedImage enemy;
-    private int enemyHealth;
+    private double enemyHealth;
     private int damage;
     private int earnings;
-    public Enemy(File file, int enemyHealth, int movementSpeed, int damage, int earnings){
+    public Enemy(File file, double enemyHealth, double movementSpeed, int damage, int earnings){
         try {
             enemy = ImageIO.read(file);
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
+        enemyBounds = new Rectangle((int) x-30, (int) y-30,60, 60);
         this.enemyHealth = enemyHealth;
         this.movementSpeed = movementSpeed;
         this.damage = damage;
         this.earnings = earnings;
-        x = -Background.TILESIZE;
-        y = Background.positionOfFirstTile();
+        x = -Background.TILESIZE + enemy.getWidth()/2;
+        y = Background.positionOfFirstTile() + enemy.getHeight()/2;
         direction = 1;
     }
     public void draw(Graphics2D graphics2D) {
         switch (direction) {
             case 1:
-                graphics2D.drawImage(rotateImage(enemy, 0), (int) x, (int) y, null);
+                graphics2D.drawImage(rotateImage(enemy, 0), (int) x - enemy.getWidth()/2, (int) y -  enemy.getHeight()/2 , null);
                 break;
             case 2:
-                graphics2D.drawImage(rotateImage(enemy, 270), (int) x, (int) y, null);
+                graphics2D.drawImage(rotateImage(enemy, 270), (int) x - enemy.getWidth()/2, (int) y -  enemy.getHeight()/2  , null);
                 break;
             case 3:
-                graphics2D.drawImage(rotateImage(enemy, 180), (int) x, (int) y, null);
+                graphics2D.drawImage(rotateImage(enemy, 180),(int) x - enemy.getWidth()/2, (int) y -  enemy.getHeight()/2  , null);
                 break;
             case 4:
-                graphics2D.drawImage(rotateImage(enemy, 90), (int) x, (int) y, null);
+                graphics2D.drawImage(rotateImage(enemy, 90), (int) x - enemy.getWidth()/2, (int) y -  enemy.getHeight()/2  , null);
                 break;
         }
     }
@@ -61,20 +60,29 @@ public class Enemy {
             case 4:
                 y += movementSpeed;
                 break;
+
         }
-        if (x > -1 && x < GamePanel.WIDTH - Background.TILESIZE * 1.5) {
-            if (!Background.isNextDirt(x, y, direction) && x % Background.TILESIZE == 0 && y % Background.TILESIZE == 0) {
+        if (x > 0 && x < GamePanel.WIDTH - Background.TILESIZE * 1.5) {
+            if (!Background.isNextDirt(x-30, y-30, direction) && (x -30)% Background.TILESIZE == 0 && (y-30) % Background.TILESIZE == 0) {
                 chooseDirection();
             }
-        } else if (x > (GamePanel.WIDTH - enemy.getWidth() + Background.TILESIZE)) {
-            death = true;
-            GamePanel.HEALTH -= damage;
-            System.out.println(GamePanel.HEALTH);
-        } else if (enemyHealth < 1) {
-            death = true;
-            GamePanel.COINS += earnings;
         }
+        if (x > (GamePanel.WIDTH + enemy.getWidth()/2+ 60)) {
+            death = true;
+            HealthBar.HEALTH -= damage;
+        }
+        if (enemyHealth < 1) {
+            death = true;
+            CoinBar.COINS += earnings;
+        }
+        updateHitBox();
     }
+
+    private void updateHitBox() {
+        enemyBounds.x = (int) x;
+        enemyBounds.y = (int) y;
+    }
+
     private static BufferedImage rotateImage(BufferedImage buffImage, double angle) {
         double radian = Math.toRadians(angle);
         double sin = Math.abs(Math.sin(radian));
@@ -150,6 +158,31 @@ public class Enemy {
 
     }
 
+    public double getX() {
+        return x;
+    }
 
+    public double getY() {
+        return y;
+    }
 
+    public BufferedImage getEnemyImage() {
+        return enemy;
+    }
+
+    public void setEnemyHealth(double enemyHealth) {
+        this.enemyHealth = enemyHealth;
+    }
+
+    public Rectangle getBounds() {
+        return enemyBounds;
+    }
+
+    public double getEnemyHealth() {
+        return enemyHealth;
+    }
+
+    public double getMovementSpeed() {
+        return movementSpeed;
+    }
 }
