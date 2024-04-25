@@ -4,19 +4,22 @@ import java.awt.*;
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 
-public class GamePanel extends JPanel implements Runnable{
+public class GamePanel extends JPanel implements Runnable {
 
     public static final int WIDTH = 900;
     public static final int HEIGHT = 900;
     public static final int FPS = 60;
-    public static int HEALTH = 20;
-    public static int COINS = 0;
     private boolean gameOver = false;
     Thread gameThread;
     Background background;
-    private static ArrayList<Enemy> enemies = new ArrayList<>();
-    private static ArrayList<Tower> towers = new ArrayList<>();
+    TowerManager towerManager;
+    EnemyManager enemyManager;
+    BulletManager bulletManager;
+    HealthBar healthBar;
+    CoinBar coinBar;
     JButton myTowerButton = new JButton("Button");
     static JButton myWaveButton = new JButton(new ImageIcon("pictures/Wave_icon/Wave_icon.png"));
     public GamePanel(){
@@ -28,29 +31,19 @@ public class GamePanel extends JPanel implements Runnable{
         this.add(myWaveButton);
 
         background = new Background();
+        towerManager = new TowerManager();
+        enemyManager = new EnemyManager();
+        bulletManager = new BulletManager();
+        healthBar = new HealthBar(20);
+        coinBar = new CoinBar(5);
+
         myTowerButton.setBounds(60, 750, 100, 100);
         myWaveButton.setBounds(0,Background.positionOfFirstTile(), myWaveButton.getIcon().getIconWidth(), myWaveButton.getIcon().getIconHeight());
         myWaveButton.setBorder(BorderFactory.createEmptyBorder());
         myWaveButton.setContentAreaFilled(false);
 
-        myTowerButton.addActionListener(new MyTowerButtonListener(0,0,5,5,10, new File("pictures/Towers/Tower_1.png")));
+        myTowerButton.addActionListener(new MyTowerButtonListener(0,0,10,1,1, new File("pictures/Towers/Tower_1.png"), "Tower_1", 240));
         myWaveButton.addActionListener(new MyWaveButtonListener());
-    }
-    public static void addEnemy(String name){
-        switch (name) {
-            case "enemy1":
-                enemies.add(new Enemy(new File("pictures/Enemies/Enemy_1.png"), 10,2,1, 10));
-                break;
-            case "enemy2":
-                enemies.add(new Enemy(new File("pictures/Enemies/Enemy_2.png"), 5, 5,1,5));
-                break;
-            case "enemy3":
-                enemies.add(new Enemy(new File("pictures/Enemies/Enemy_3.png"), 5, 10,1, 8));
-                break;
-        }
-    }
-    public static void addTower(Tower tower){
-        towers.add(tower);
     }
     public void launchGame(){
         gameThread = new Thread(this);
@@ -63,7 +56,6 @@ public class GamePanel extends JPanel implements Runnable{
         double delta = 0;
         long lastTime = System.nanoTime();
         long currentTime;
-        int timer = 0;
 
         while(!gameOver) {
 
@@ -76,8 +68,7 @@ public class GamePanel extends JPanel implements Runnable{
                 update();
                 repaint();
                 delta--;
-                timer++;
-                if (HEALTH < 1) {
+                if (HealthBar.HEALTH < 1) {
                     gameOver = true;
                 }
             }
@@ -85,20 +76,9 @@ public class GamePanel extends JPanel implements Runnable{
 
     }
     public void update(){
-        if (!enemies.isEmpty()) {
-            for (int i =0; i < enemies.size(); i++) {
-                enemies.get(i).update();
-                if (enemies.get(i).isDeath() == true) {
-                    enemies.remove(enemies.get(i));
-                }
-            }
-        }
-        if (!towers.isEmpty()) {
-            for (int i =0; i < towers.size(); i++) {
-                towers.get(i).update();
-            }
-        }
-
+        enemyManager.update();
+        bulletManager.update();
+        towerManager.update();
         if (Waves.wave) {
             Waves.update();
         }
@@ -109,20 +89,13 @@ public class GamePanel extends JPanel implements Runnable{
 
         Graphics2D graphics2D = (Graphics2D) graphics;
         background.draw(graphics2D);
-        try {
-            graphics2D.drawImage(ImageIO.read(new File("pictures/Health_Bar/Health_Bar_" + HEALTH + ".png")), -40,-80, 240, 240, null);
-        } catch (IOException e) {
-            throw new RuntimeException(e);
-        }
-        if (!enemies.isEmpty()) {
-            for (int i =0; i < enemies.size(); i++) {
-                enemies.get(i).draw(graphics2D);
-            }
-        }
-        if (!towers.isEmpty()) {
-            for (int i =0; i < towers.size(); i++) {
-                towers.get(i).draw(graphics2D);
-            }
-        }
+        healthBar.draw(graphics2D);
+        enemyManager.draw(graphics2D);
+        towerManager.draw(graphics2D);
+        bulletManager.draw(graphics2D);
+        coinBar.draw(graphics2D);
+
     }
+
+
 }
