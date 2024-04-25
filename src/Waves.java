@@ -40,7 +40,7 @@ public class Waves {
     }
     public static void spawnEnemy(double spawnRate, String enemyName, int maxEnemyOFType){
         if (spawnRatePerSecond(spawnRate) && countEnemyTypes(enemyName) < maxEnemyOFType){
-            GamePanel.addEnemy(enemyName);
+            EnemyManager.addEnemy(enemyName);
             enemiesTypes.add(enemyName);
             enemiesCount++;
         }
@@ -53,8 +53,8 @@ public class Waves {
         }
     }
     public static void wave1(){
-        spawnEnemy(1,"enemy1",5);
-        spawnEnemy(0.2,"enemy2",10);
+        spawnEnemy(3,"enemy1",0);
+        spawnEnemy(3,"enemy2",5);
     }
 
 }
