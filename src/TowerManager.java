@@ -10,6 +10,22 @@ public class TowerManager {
     public static void addTower(Tower tower){
         towers.add(tower);
     }
+    public static boolean isPlaceable(Tower t){
+        boolean trueFalse = true;
+        if (Background.isTowerPlaceable(t)){
+            for (Tower tower: towers) {
+                if (!tower.equals(t)) {
+                    if (t.getX() - tower.getX() <= 60 && t.getX() - tower.getX() >= -60 && t.getY() - tower.getY() <= 60 && t.getY() - tower.getY() >= -60){
+                        trueFalse = false;
+                        break;
+                    }
+                }
+            }
+        } else {
+            trueFalse = false;
+        }
+        return trueFalse;
+    }
 
     public void update() {
         if (!towers.isEmpty()) {
