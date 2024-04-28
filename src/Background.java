@@ -1,9 +1,7 @@
 import java.awt.*;
-import java.awt.image.BufferedImage;
-
 public class Background {
     public static final int TILESIZE = 60;
-    private static final int columnLenght = TILESIZE / 4;
+    private static final int columnLenght = TILESIZE/4;
     public void draw(Graphics2D graphics2D) {
 
         for (int x = 0; x < columnLenght; x++) {
@@ -35,7 +33,7 @@ public class Background {
             {1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1},
             {1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1},
             {1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1},
-            {1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1},
+            {1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1}
     };
     public static int positionOfFirstTile(){
         int tilePosition;
@@ -48,8 +46,8 @@ public class Background {
     }
     public static boolean isNextDirt(double x, double y, int direction){
         boolean trueFalse = true;
-        int tileX = (int) Math.round(y/TILESIZE);
-        int tileY = (int) Math.round(x/TILESIZE);
+        int tileX = (int) (y/TILESIZE);
+        int tileY = (int) (x/TILESIZE);
         switch (direction) {
             case 1:
                 if (backgroundEditor[tileX][tileY+1] != 2) {
@@ -74,9 +72,19 @@ public class Background {
         }
         return trueFalse;
     }
-
-
-
-
-
+    public static boolean isTowerPlaceable(Tower t){
+        int tileX = (int) ((t.getY()-30)/TILESIZE);
+        int tileY = (int) ((t.getX()+30)/TILESIZE);
+        int tileX2 = (int) ((t.getY()-30)/TILESIZE);
+        int tileY2 = (int) ((t.getX()-30)/TILESIZE);
+        int tileX3 = (int) ((t.getY()+15)/TILESIZE);
+        int tileY3 = (int) ((t.getX()-30)/TILESIZE);
+        int tileX4 = (int) ((t.getY()+15)/TILESIZE);
+        int tileY4 = (int) ((t.getX()+30)/TILESIZE);
+        if (backgroundEditor[tileX][tileY] != 2 && backgroundEditor[tileX2][tileY2] != 2 && backgroundEditor[tileX3][tileY3] != 2 &&  backgroundEditor[tileX4][tileY4] != 2) {
+            return true;
+        } else {
+            return false;
+        }
+    }
 }
