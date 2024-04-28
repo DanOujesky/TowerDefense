@@ -28,7 +28,7 @@ public class Tower {
         this.prize = prize;
         this.name = name;
         this.range = range;
-        towerBounds = new Rectangle((int) x, (int) y,towerImage.getWidth(), towerImage.getHeight());
+        towerBounds = new Rectangle((int) x, (int)y,towerImage.getWidth(), towerImage.getHeight());
     }
     public static int getDistance(double x1, double y1, double x2,  double y2){
         double xDiff = Math.abs(x1 -x2);
@@ -69,7 +69,7 @@ public class Tower {
         if (enemyTarget == null) {
             setEnemyTarget();
         } else {
-            if (!checkEnemyTarget()) {
+            if (!checkEnemyTarget() || enemyTarget.isDeath()) {
                 setEnemyTarget();
             }
         }
@@ -79,10 +79,10 @@ public class Tower {
 
     public void update() {
         if (placeTower) {
-            x = MyMouseListener.positionX+30   - MyMouseListener.positionX%60;
-            y =  MyMouseListener.positionY+30  - MyMouseListener.positionY%60;
+            x = MyMouseListener.positionX   - MyMouseListener.positionX%15;
+            y =  MyMouseListener.positionY  - MyMouseListener.positionY%15;
             updateHitBox();
-            if (MyMouseListener.mousePressed) {
+            if (MyMouseListener.mousePressed && TowerManager.isPlaceable(this) ) {
                 placeTower = false;
             }
         } else {
@@ -138,5 +138,9 @@ public class Tower {
         this.placeTower = placeTower;
         TowerManager.addTower(this);
         CoinBar.COINS -= prize;
+    }
+
+    public Rectangle getTowerBounds() {
+        return towerBounds;
     }
 }
