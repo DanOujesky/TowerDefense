@@ -6,8 +6,9 @@ import java.awt.event.MouseMotionListener;
 public class MyMouseListener implements MouseListener, MouseMotionListener {
     public static double positionX;
     public static double positionY;
-    public static boolean mousePressed;
+    public static boolean letfMousePressed;
     public static boolean mouseEntered;
+    public static boolean rightMousePressed;
     @Override
     public void mouseClicked(MouseEvent e) {
 
@@ -15,12 +16,23 @@ public class MyMouseListener implements MouseListener, MouseMotionListener {
 
     @Override
     public void mousePressed(MouseEvent e) {
-        mousePressed = true;
+        if (e.getButton() == MouseEvent.BUTTON1) {
+            letfMousePressed = true;
+        }
+
+        if (e.getButton() == MouseEvent.BUTTON3){
+            rightMousePressed = true;
+        }
     }
 
     @Override
     public void mouseReleased(MouseEvent e) {
-        mousePressed = false;
+        if (e.getButton() == MouseEvent.BUTTON1) {
+            letfMousePressed = false;
+        }
+        if (e.getButton() == MouseEvent.BUTTON3){
+            rightMousePressed = false;
+        }
     }
 
     @Override
