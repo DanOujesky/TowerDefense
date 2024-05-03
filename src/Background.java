@@ -73,15 +73,17 @@ public class Background {
         return trueFalse;
     }
     public static boolean isTowerPlaceable(Tower t){
-        int tileX = (int) ((t.getY()-30)/TILESIZE);
-        int tileY = (int) ((t.getX()+30)/TILESIZE);
+        int tileX = (int) ((t.getY())/TILESIZE);
+        int tileY = (int) ((t.getX())/TILESIZE);
         int tileX2 = (int) ((t.getY()-30)/TILESIZE);
-        int tileY2 = (int) ((t.getX()-30)/TILESIZE);
-        int tileX3 = (int) ((t.getY()+15)/TILESIZE);
+        int tileY2 = (int) ((t.getX()+15)/TILESIZE);
+        int tileX3 = (int) ((t.getY()-30)/TILESIZE);
         int tileY3 = (int) ((t.getX()-30)/TILESIZE);
         int tileX4 = (int) ((t.getY()+15)/TILESIZE);
-        int tileY4 = (int) ((t.getX()+30)/TILESIZE);
-        if (backgroundEditor[tileX][tileY] != 2 && backgroundEditor[tileX2][tileY2] != 2 && backgroundEditor[tileX3][tileY3] != 2 &&  backgroundEditor[tileX4][tileY4] != 2) {
+        int tileY4 = (int) ((t.getX()-30)/TILESIZE);
+        int tileX5 = (int) ((t.getY()+15)/TILESIZE);
+        int tileY5 = (int) ((t.getX()+15)/TILESIZE);
+        if (backgroundEditor[tileX][tileY] != 2 && backgroundEditor[tileX2][tileY2] != 2 && backgroundEditor[tileX3][tileY3] != 2 &&  backgroundEditor[tileX4][tileY4] != 2 &&  backgroundEditor[tileX5][tileY5] != 2 ) {
             return true;
         } else {
             return false;
