@@ -13,16 +13,21 @@ public class EnemyManager {
     public static void addEnemy(String name){
         switch (name) {
             case "enemy1":
-                enemies.add(new Enemy(new File("pictures/Enemies/Enemy_1.png"), 10,2,1, 10));
+                enemies.add(new Enemy(new File("pictures/Enemies/Enemy_1.png"), 40,1,1, 1));
                 break;
             case "enemy2":
-                enemies.add(new Enemy(new File("pictures/Enemies/Enemy_2.png"), 20, 3,1,5));
+                enemies.add(new Enemy(new File("pictures/Enemies/Enemy_2.png"), 20, 3,1,1));
                 break;
             case "enemy3":
-                enemies.add(new Enemy(new File("pictures/Enemies/Enemy_3.png"), 5, 1,1, 8));
+                enemies.add(new Enemy(new File("pictures/Enemies/Enemy_3.png"),  400,0.5,5, 3));
+                break;
+            case "enemy4":
+                enemies.add(new Enemy(new File("pictures/Enemies/Enemy_4.png"),  4000,0.5,5, 5));
                 break;
         }
     }
+
+
 
     public void update() {
         if (!enemies.isEmpty()) {
