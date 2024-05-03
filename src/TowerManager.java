@@ -1,4 +1,8 @@
 import java.awt.*;
+import java.awt.geom.AffineTransform;
+import java.awt.image.BufferedImage;
+import java.awt.image.ImageObserver;
+import java.io.File;
 import java.util.ArrayList;
 
 public class TowerManager {
@@ -7,15 +11,30 @@ public class TowerManager {
     public TowerManager(){
         towers = new ArrayList<>();
     }
-    public static void addTower(Tower tower){
-        towers.add(tower);
+    public static void addTower(String name){
+        if (!towers.isEmpty() ) {
+            if (towers.get(towers.size()-1).isPlaceTower()) towers.remove(towers.size()-1);
+        }
+        switch (name) {
+            case "Tower_1":
+                towers.add(new Tower(0,0,12,1,10, new File("pictures/Towers/Tower_1.png"), "Tower_1", 200));
+                break;
+            case "Canon_1":
+                towers.add(new Tower(0,0,5,1,22, new File("pictures/Towers/Canon_1.png"), "Canon", 280));
+                break;
+        }
+        if (towers.get(towers.size()-1).getPrize() <=  CoinBar.COINS) {
+            towers.get(towers.size()-1).setPlaceTower(true);
+        } else {
+            towers.remove(towers.size()-1);
+        }
     }
     public static boolean isPlaceable(Tower t){
         boolean trueFalse = true;
         if (Background.isTowerPlaceable(t)){
             for (Tower tower: towers) {
                 if (!tower.equals(t)) {
-                    if (t.getX() - tower.getX() <= 60 && t.getX() - tower.getX() >= -60 && t.getY() - tower.getY() <= 60 && t.getY() - tower.getY() >= -60){
+                    if (t.getX() - tower.getX() <= 45 && t.getX() - tower.getX() >= -45 && t.getY() - tower.getY() <= 45 && t.getY() - tower.getY() >= -45){
                         trueFalse = false;
                         break;
                     }
@@ -26,6 +45,9 @@ public class TowerManager {
         }
         return trueFalse;
     }
+    public static void removeTower(Tower t) {
+        towers.remove(t);
+    }
 
     public void update() {
         if (!towers.isEmpty()) {
@@ -34,6 +56,7 @@ public class TowerManager {
             }
         }
     }
+
     public void draw(Graphics2D graphics2D) {
         if (!towers.isEmpty()) {
             for (int i = 0; i < towers.size(); i++) {
