@@ -1,5 +1,7 @@
 import javax.imageio.ImageIO;
 import java.awt.*;
+import java.awt.event.KeyListener;
+import java.awt.geom.AffineTransform;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
@@ -44,7 +46,7 @@ public class Tower {
         double range;
         for (int i =0; i < EnemyManager.getEnemies().size(); i++) {
             range = getDistance(x, y,EnemyManager.getEnemies().get(i).getX(), EnemyManager.getEnemies().get(i).getY());
-            if (range < this.range / 2 ) {
+            if (checkTowerRange(range)) {
                 trueFalse = true;
                 break;
             }
@@ -54,16 +56,19 @@ public class Tower {
     }
     private boolean checkEnemyTarget(){
         int range = getDistance(x , y,enemyTarget.getX(), enemyTarget.getY());
-        return range < this.range/2;
+        return checkTowerRange(range);
     }
     public void setEnemyTarget(){
         for (int i =0; i < EnemyManager.getEnemies().size(); i++) {
             double range = getDistance(x, y,EnemyManager.getEnemies().get(i).getX(), EnemyManager.getEnemies().get(i).getY());
-            if (range < this.range / 2) {
+            if (checkTowerRange(range)) {
                 enemyTarget = EnemyManager.getEnemies().get(i);
                 break;
             }
         }
+    }
+    public boolean checkTowerRange(double range){
+        return range < this.range/2+16;
     }
     public void shoot(){
         if (enemyTarget == null) {
@@ -74,16 +79,19 @@ public class Tower {
             }
         }
         BulletManager.newBullet(this);
-
     }
 
     public void update() {
         if (placeTower) {
-            x = MyMouseListener.positionX   - MyMouseListener.positionX%15;
-            y =  MyMouseListener.positionY  - MyMouseListener.positionY%15;
+            if (MyMouseListener.rightMousePressed) {
+                TowerManager.removeTower(this);
+            }
+            x = MyMouseListener.positionX     - MyMouseListener.positionX%15;
+            y =  MyMouseListener.positionY   - MyMouseListener.positionY%15;
             updateHitBox();
-            if (MyMouseListener.mousePressed && TowerManager.isPlaceable(this) ) {
+            if (MyMouseListener.letfMousePressed && TowerManager.isPlaceable(this) ) {
                 placeTower = false;
+                CoinBar.COINS -= prize;
             }
         } else {
             if (!isCooldownOver()) {
@@ -91,12 +99,18 @@ public class Tower {
             } else {
                 if (isThereEnemy()) {
                     shoot();
+                    rotateTower(90);
                     resetCooldown();
                 }
             }
         }
 
     }
+
+    public void rotateTower(double rotate) {
+       towerImage = Enemy.rotateImage(towerImage,rotate);
+    }
+
     public boolean isCooldownOver(){
         return clock >= attackSpeed;
     }
@@ -108,7 +122,12 @@ public class Tower {
 
     public void draw(Graphics2D graphics2D) {
         graphics2D.drawImage(towerImage, (int) x - 30, (int) y - 30, null);
+        if (placeTower) {
+            graphics2D.setColor(Color.RED);
+            graphics2D.drawRect((int) (x-30), (int) (y-30),60,60);
+        }
         if (towerBounds.contains(MyMouseListener.positionX+30, MyMouseListener.positionY+30)){
+            graphics2D.setColor(Color.black);
             graphics2D.drawOval((int) x - range/2, (int) y - range/2, this.range, this.range);
         }
 
@@ -136,8 +155,14 @@ public class Tower {
 
     public void setPlaceTower(boolean placeTower) {
         this.placeTower = placeTower;
-        TowerManager.addTower(this);
-        CoinBar.COINS -= prize;
+    }
+
+    public double getPrize() {
+        return prize;
+    }
+
+    public boolean isPlaceTower() {
+        return placeTower;
     }
 
     public Rectangle getTowerBounds() {
