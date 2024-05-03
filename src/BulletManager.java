@@ -8,11 +8,11 @@ public class BulletManager {
         bullets = new ArrayList<>();
     }
     public static void newBullet(Tower t){
-        int  xDist = (int) Math.abs(t.getX() - t.getEnemyTarget().getX());
-        int  yDist = (int) Math.abs(t.getY() - t.getEnemyTarget().getY());
-        int totalDist = xDist + yDist;
+        int  xDist = (int) (t.getX() - t.getEnemyTarget().getX());
+        int  yDist = (int) (t.getY() - t.getEnemyTarget().getY());
+        int totalDist = Math.abs(xDist) + Math.abs(yDist);
 
-        double xPer = (double) xDist / totalDist;
+        double xPer = (double) Math.abs(xDist) / totalDist;
 
         double xSpeed = xPer * t.getEnemyTarget().getMovementSpeed();
         double ySpeed = t.getEnemyTarget().getMovementSpeed() - xSpeed;
@@ -24,11 +24,19 @@ public class BulletManager {
         if (t.getY() > t.getEnemyTarget().getY()) {
             ySpeed *= -1;
         }
+        double arcValue = Math.atan(yDist / (double) xDist);
+        double rotate = Math.toDegrees(arcValue);
+
+        if (xDist < 0) {
+            rotate += 180;
+        }
 
         switch (t.getName())
         {
             case "Tower_1":
-                bullets.add(new Bullet(t.getX() - 30,t.getY()-30,xSpeed*10,ySpeed*10,t.getDamage(), new File("pictures/Bullets/Bullet_1.png")));
+                bullets.add(new Bullet(t.getX() - 30,t.getY()-30,xSpeed*10,ySpeed*10,t.getDamage(), rotate, new File("pictures/Bullets/Bullet_1.png")));
+            case "Canon" :
+                bullets.add(new Bullet(t.getX() - 30,t.getY()-30,xSpeed*10,ySpeed*10,t.getDamage(), rotate, new File("pictures/Bullets/Bullet_1.png")));
         }
 
 
