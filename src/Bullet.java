@@ -7,16 +7,17 @@ import java.util.ArrayList;
 
 public class Bullet {
 
-    private double x,y, Xspeed, Yspeed, damage;
+    private double x,y, Xspeed, Yspeed, damage, rotation;
     private boolean isDeath;
     BufferedImage bulletImage;
 
-    public Bullet(double x, double y, double Xspeed, double Yspeed,double damage, File bulletFile) {
+    public Bullet(double x, double y, double Xspeed, double Yspeed,double damage, double rotation, File bulletFile) {
         this.x = x;
         this.y = y;
         this.Xspeed = Xspeed;
         this.Yspeed = Yspeed;
         this.damage = damage;
+        this.rotation = rotation;
         isDeath = false;
         try {
             this.bulletImage = ImageIO.read(bulletFile);
