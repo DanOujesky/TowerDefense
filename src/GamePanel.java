@@ -20,14 +20,17 @@ public class GamePanel extends JPanel implements Runnable {
     BulletManager bulletManager;
     HealthBar healthBar;
     CoinBar coinBar;
-    JButton myTowerButton = new JButton("Button");
+    JButton tower1 = new JButton(new ImageIcon("pictures/TowerButtons/TowerButton_1.png"));
+    JButton canon = new JButton(new ImageIcon("pictures/TowerButtons/TowerButton_2.png"));
     static JButton myWaveButton = new JButton(new ImageIcon("pictures/Wave_icon/Wave_icon.png"));
     public GamePanel(){
         this.setPreferredSize(new Dimension(WIDTH, HEIGHT));
         this.setLayout(null);
         this.addMouseListener(new MyMouseListener());
         this.addMouseMotionListener(new MyMouseListener());
-        this.add(myTowerButton);
+        this.setFocusable(true);
+        this.add(tower1);
+        this.add(canon);
         this.add(myWaveButton);
 
         background = new Background();
@@ -35,14 +38,16 @@ public class GamePanel extends JPanel implements Runnable {
         enemyManager = new EnemyManager();
         bulletManager = new BulletManager();
         healthBar = new HealthBar(20);
-        coinBar = new CoinBar(5);
+        coinBar = new CoinBar(21);
 
-        myTowerButton.setBounds(60, 750, 100, 100);
+        tower1.setBounds(120, 750, 100, 100);
+        canon.setBounds(235, 750, 100, 100);
         myWaveButton.setBounds(0,Background.positionOfFirstTile(), myWaveButton.getIcon().getIconWidth(), myWaveButton.getIcon().getIconHeight());
         myWaveButton.setBorder(BorderFactory.createEmptyBorder());
         myWaveButton.setContentAreaFilled(false);
 
-        myTowerButton.addActionListener(new MyTowerButtonListener(0,0,10,1,1, new File("pictures/Towers/Tower_1.png"), "Tower_1", 240));
+        tower1.addActionListener(new MyTowerButtonListener("Tower_1"));
+        canon.addActionListener(new MyTowerButtonListener("Canon_1"));
         myWaveButton.addActionListener(new MyWaveButtonListener());
     }
     public void launchGame(){
