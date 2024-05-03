@@ -11,17 +11,18 @@ public class Enemy {
     private Rectangle enemyBounds;
     private int direction;
     private BufferedImage enemy;
-    private double enemyHealth;
+    private double currentEnemyHealth, maxEnemyHealth;
     private int damage;
     private int earnings;
-    public Enemy(File file, double enemyHealth, double movementSpeed, int damage, int earnings){
+    public Enemy(File file, double maxEnemyHealth, double movementSpeed, int damage, int earnings){
         try {
             enemy = ImageIO.read(file);
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
         enemyBounds = new Rectangle((int) x-30, (int) y-30,60, 60);
-        this.enemyHealth = enemyHealth;
+        this.currentEnemyHealth = maxEnemyHealth;
+        this.maxEnemyHealth = maxEnemyHealth;
         this.movementSpeed = movementSpeed;
         this.damage = damage;
         this.earnings = earnings;
@@ -30,6 +31,7 @@ public class Enemy {
         direction = 1;
     }
     public void draw(Graphics2D graphics2D) {
+        drawHealthBar(graphics2D);
         switch (direction) {
             case 1:
                 graphics2D.drawImage(rotateImage(enemy, 0), (int) x - enemy.getWidth()/2, (int) y -  enemy.getHeight()/2 , null);
@@ -71,7 +73,7 @@ public class Enemy {
             death = true;
             HealthBar.HEALTH -= damage;
         }
-        if (enemyHealth < 1) {
+        if (currentEnemyHealth < 1) {
             death = true;
             CoinBar.COINS += earnings;
         }
@@ -82,8 +84,12 @@ public class Enemy {
         enemyBounds.x = (int) x;
         enemyBounds.y = (int) y;
     }
+    public void drawHealthBar(Graphics2D graphics2D){
+        graphics2D.setColor(Color.RED);
+        graphics2D.fillRect((int) x-22, (int) y-27, (int) (currentEnemyHealth/maxEnemyHealth*44),3);
+    }
 
-    private static BufferedImage rotateImage(BufferedImage buffImage, double angle) {
+    public static BufferedImage rotateImage(BufferedImage buffImage, double angle) {
         double radian = Math.toRadians(angle);
         double sin = Math.abs(Math.sin(radian));
         double cos = Math.abs(Math.cos(radian));
@@ -170,8 +176,8 @@ public class Enemy {
         return enemy;
     }
 
-    public void setEnemyHealth(double enemyHealth) {
-        this.enemyHealth = enemyHealth;
+    public void setEnemyHealth(double currentEnemyHealth) {
+        this.currentEnemyHealth = currentEnemyHealth;
     }
 
     public Rectangle getBounds() {
@@ -179,7 +185,7 @@ public class Enemy {
     }
 
     public double getEnemyHealth() {
-        return enemyHealth;
+        return currentEnemyHealth;
     }
 
     public double getMovementSpeed() {
