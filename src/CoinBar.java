@@ -11,6 +11,7 @@ public class CoinBar {
 
     public void draw(Graphics2D graphics2D) {
         String coins = "COINS: " + COINS;
+        graphics2D.setColor(Color.BLACK);
         graphics2D.drawString(coins, 800, 40);
     }
 }
