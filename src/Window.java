@@ -1,14 +1,17 @@
 import javax.swing.*;
+import java.awt.*;
 
 public class Window extends JFrame {
 
+    static JFrame window;
+    static GamePanel gamePanel;
     public Window(){
 
-        JFrame window = new JFrame("Tower Defense");
+        window = new JFrame("Tower Defense");
         window.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         window.setResizable(false);
 
-        GamePanel gamePanel = new GamePanel();
+        gamePanel = new GamePanel();
         window.add(gamePanel);
         window.pack();
 
@@ -17,4 +20,8 @@ public class Window extends JFrame {
 
         gamePanel.launchGame();
     }
+    public static void addButton(JButton jButton){
+        gamePanel.add(jButton);
+    }
+
 }
