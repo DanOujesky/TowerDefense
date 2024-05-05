@@ -1,12 +1,8 @@
 import javax.imageio.ImageIO;
-import javax.swing.*;
 import java.awt.*;
-import java.awt.event.KeyListener;
-import java.awt.geom.AffineTransform;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
-import java.time.Year;
 
 public class Tower {
     private double x,y, attackSpeed, damage, prize;
@@ -19,8 +15,10 @@ public class Tower {
     private Rectangle towerBounds;
     private boolean towerMenu = false;
     private MyUpgradeButton upgradeButton;
+    int level;
+    int maxLevel;
 
-    public Tower(double x, double y, double attackSpeed,  double damage, double prize, File towerFile, String name, int range) {
+    public Tower(double x, double y, double attackSpeed,  double damage, double prize, int maxLevel, File towerFile, String name, int range) {
         try {
             towerImage = ImageIO.read(towerFile);
         } catch (IOException e) {
@@ -33,7 +31,9 @@ public class Tower {
         this.prize = prize;
         this.name = name;
         this.range = range;
+        this.maxLevel = maxLevel;
         towerBounds = new Rectangle((int) x, (int)y,towerImage.getWidth(), towerImage.getHeight());
+        level = 1;
     }
     public static int getDistance(double x1, double y1, double x2,  double y2){
         double xDiff = Math.abs(x1 -x2);
@@ -147,8 +147,10 @@ public class Tower {
         }
         if (towerMenu) {
             graphics2D.setColor(Color.BLACK);
-
             graphics2D.drawOval((int) x - range/2, (int) y - range/2, this.range, this.range);
+            if (upgradeButton.collisionWithMouse()) {
+                upgradeButton.draw(graphics2D);
+            }
         } else {
             if (collisionWithMouse()) {
                 graphics2D.setColor(Color.black);
@@ -162,6 +164,35 @@ public class Tower {
         } else {
             return false;
         }
+    }
+    public int[] getUpgradeValues(){
+        int [] towerValues = new int[4];
+        towerValues[0] = (int) damage;
+        towerValues[1] = (int) attackSpeed;
+        towerValues[2] = (int) prize;
+        towerValues[3] = range;
+        switch (name) {
+            case "Tower_1":
+                switch (level) {
+                    case 1:
+                        towerValues[0] = (int) (damage + 1);
+                        towerValues[3] = range + 5;
+                        break;
+                    case 2:
+                        towerValues[1] = (int) (attackSpeed - 2);
+                        towerValues[2] = 5;
+                        towerValues[3] = range + 5;
+                }
+                break;
+            case "Canon_1":
+                switch (level) {
+                    case 1:
+
+                }
+
+        }
+
+        return towerValues;
     }
 
     public double getX() {
@@ -189,7 +220,7 @@ public class Tower {
     }
 
     public double getPrize() {
-        return prize;
+       return prize;
     }
 
     public boolean isPlaceTower() {
@@ -213,5 +244,14 @@ public class Tower {
     }
 
     public void upgrade() {
+        damage = getUpgradeValues()[0];
+        attackSpeed = getUpgradeValues()[1];
+        prize += getUpgradeValues()[2];
+        range = getUpgradeValues()[3];
+        level++;
+    }
+
+    public double getAttackSpeed() {
+        return attackSpeed;
     }
 }
