@@ -24,11 +24,11 @@ public class GamePanel extends JPanel implements Runnable {
     JButton canon = new JButton(new ImageIcon("pictures/TowerButtons/TowerButton_2.png"));
     static JButton speedButton = new JButton(new ImageIcon("pictures/Speed_icons/Speed_icon_1x.png"));
     static JButton myWaveButton = new JButton(new ImageIcon("pictures/Wave_icon/Wave_icon.png"));
+    MyMouseListener myMouseListener = new MyMouseListener();
     public GamePanel(){
         this.setPreferredSize(new Dimension(WIDTH, HEIGHT));
         this.setLayout(null);
         this.addMouseListener(new MyMouseListener());
-        this.addMouseMotionListener(new MyMouseListener());
         this.setFocusable(true);
         this.add(tower1);
         this.add(canon);
@@ -100,6 +100,8 @@ public class GamePanel extends JPanel implements Runnable {
         if (Waves.wave) {
             Waves.update();
         }
+        myMouseListener.updatePositions();
+
 
     }
     public void paintComponent(Graphics graphics) {
