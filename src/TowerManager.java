@@ -59,6 +59,12 @@ public class TowerManager {
         }
         return trueFalse;
     }
+    public static void sellTower(Tower tower){
+        CoinBar.COINS += (int)tower.getPrize()/2;
+        Window.removeButton(tower.getMySellButton());
+        Window.removeButton(tower.getUpgradeButton());
+        removeTower(tower);
+    }
     public static void removeTower(Tower t) {
         towers.remove(t);
     }
