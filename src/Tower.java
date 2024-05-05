@@ -1,4 +1,5 @@
 import javax.imageio.ImageIO;
+import javax.swing.*;
 import java.awt.*;
 import java.awt.event.KeyListener;
 import java.awt.geom.AffineTransform;
@@ -16,6 +17,8 @@ public class Tower {
     private Enemy enemyTarget = null;
     private int clock;
     private Rectangle towerBounds;
+    private boolean towerMenu = false;
+    private MyUpgradeButton upgradeButton;
 
     public Tower(double x, double y, double attackSpeed,  double damage, double prize, File towerFile, String name, int range) {
         try {
@@ -83,15 +86,15 @@ public class Tower {
 
     public void update() {
         if (placeTower) {
-            if (MyMouseListener.rightMousePressed) {
-                TowerManager.removeTower(this);
-            }
             x = MyMouseListener.positionX     - MyMouseListener.positionX%15;
             y =  MyMouseListener.positionY   - MyMouseListener.positionY%15;
             updateHitBox();
             if (MyMouseListener.letfMousePressed && TowerManager.isPlaceable(this) ) {
                 placeTower = false;
                 CoinBar.COINS -= prize;
+                Window.addButton(new TowerButton(this));
+                upgradeButton = new MyUpgradeButton(this);
+                Window.addButton(upgradeButton);
             }
         } else {
             if (!isCooldownOver()) {
@@ -104,6 +107,22 @@ public class Tower {
                 }
             }
         }
+        if (!MyMouseListener.leftMouseClicked) towerMenu = false;
+        if (upgradeButton!= null) {
+            if (towerMenu) {
+                if (!upgradeButton.isVisible()) {
+                    upgradeButton.clickCount = 0;
+                    upgradeButton.changeIcon();
+                    upgradeButton.setVisible(true);
+                }
+            } else {
+                if (upgradeButton.isVisible()) {
+                    upgradeButton.setVisible(false);
+                }
+            }
+        }
+
+
 
     }
 
@@ -120,17 +139,29 @@ public class Tower {
 
 
 
+
     public void draw(Graphics2D graphics2D) {
         graphics2D.drawImage(towerImage, (int) x - 30, (int) y - 30, null);
         if (placeTower) {
-            graphics2D.setColor(Color.RED);
-            graphics2D.drawRect((int) (x-30), (int) (y-30),60,60);
+            TowerManager.drawCollisionRect(graphics2D);
         }
-        if (towerBounds.contains(MyMouseListener.positionX+30, MyMouseListener.positionY+30)){
-            graphics2D.setColor(Color.black);
-            graphics2D.drawOval((int) x - range/2, (int) y - range/2, this.range, this.range);
-        }
+        if (towerMenu) {
+            graphics2D.setColor(Color.BLACK);
 
+            graphics2D.drawOval((int) x - range/2, (int) y - range/2, this.range, this.range);
+        } else {
+            if (collisionWithMouse()) {
+                graphics2D.setColor(Color.black);
+                graphics2D.drawOval((int) x - range/2, (int) y - range/2, this.range, this.range);
+            }
+        }
+    }
+    public boolean collisionWithMouse(){
+        if (towerBounds.contains(MyMouseListener.positionX+30, MyMouseListener.positionY+30)){
+            return true;
+        } else {
+            return false;
+        }
     }
 
     public double getX() {
@@ -167,5 +198,20 @@ public class Tower {
 
     public Rectangle getTowerBounds() {
         return towerBounds;
+    }
+
+    public boolean isTowerMenu() {
+        return towerMenu;
+    }
+
+    public void setTowerMenu(boolean towerMenu) {
+        this.towerMenu = towerMenu;
+    }
+
+    public int getRange() {
+        return range;
+    }
+
+    public void upgrade() {
     }
 }
