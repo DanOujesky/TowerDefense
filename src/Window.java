@@ -23,5 +23,6 @@ public class Window extends JFrame {
     public static void addButton(JButton jButton){
         gamePanel.add(jButton);
     }
+    public static void removeButton(JButton jButton){gamePanel.remove(jButton);}
 
 }
