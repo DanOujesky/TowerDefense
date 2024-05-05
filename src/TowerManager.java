@@ -29,6 +29,20 @@ public class TowerManager {
             towers.remove(towers.size()-1);
         }
     }
+    public static void drawCollisionRect(Graphics2D graphics2D) {
+        for (Tower t: towers) {
+            graphics2D.setColor(Color.RED);
+            graphics2D.drawRect((int) (t.getX()-30), (int) (t.getY()-30),60,60);
+        }
+    }
+    public static boolean touchingTower(){
+        for (Tower t : towers) {
+            if (t.getTowerBounds().contains(MyMouseListener.positionX+30, MyMouseListener.positionY+30)) {
+                return true;
+            }
+        }
+        return false;
+    }
     public static boolean isPlaceable(Tower t){
         boolean trueFalse = true;
         if (Background.isTowerPlaceable(t)){
@@ -47,6 +61,23 @@ public class TowerManager {
     }
     public static void removeTower(Tower t) {
         towers.remove(t);
+    }
+
+    public static boolean checkTowerMenu(Tower tower) {
+        for (Tower t: towers) {
+            if (!t.equals(tower) && t.isTowerMenu()) {
+                return false;
+            }
+        }
+        return true;
+    }
+    public static boolean checkTowerPlacing() {
+        for (Tower t: towers) {
+            if (t.isPlaceTower()) {
+                return false;
+            }
+        }
+        return true;
     }
 
     public void update() {
