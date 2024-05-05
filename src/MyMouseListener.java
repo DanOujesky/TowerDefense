@@ -1,9 +1,10 @@
 
+import java.awt.*;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.awt.event.MouseMotionListener;
 
-public class MyMouseListener implements MouseListener, MouseMotionListener {
+public class MyMouseListener implements MouseListener {
     public static double positionX;
     public static double positionY;
     public static boolean letfMousePressed;
@@ -41,25 +42,17 @@ public class MyMouseListener implements MouseListener, MouseMotionListener {
 
     @Override
     public void mouseEntered(MouseEvent e) {
-        positionX = e.getX();
-        positionY = e.getY();
+
     }
 
     @Override
     public void mouseExited(MouseEvent e) {
-        positionX = e.getX();
-        positionY = e.getY();
+
     }
 
-    @Override
-    public void mouseDragged(MouseEvent e) {
-        positionX = e.getX();
-        positionY = e.getY();
-    }
 
-    @Override
-    public void mouseMoved(MouseEvent e) {
-        positionX = e.getX();
-        positionY = e.getY();
+    public void updatePositions() {
+        positionX = MouseInfo.getPointerInfo().getLocation().getX()-510;
+        positionY = MouseInfo.getPointerInfo().getLocation().getY()-83;
     }
 }
