@@ -12,6 +12,7 @@ public class Waves {
     static ArrayList<String> enemiesTypes = new ArrayList<>();
     public static void startWave(){
         waveCount++;
+        CoinBar.COINS += 3;
         timer = 0;
         enemiesCount = 0;
         wave = true;
@@ -93,8 +94,8 @@ public class Waves {
     }
     public static void wave5(){
         fullEnemies = 40;
-        spawnEnemy(5,"enemy2",10);
-        spawnEnemy(2,"enemy3",30);
+        spawnEnemy(5,"enemy2",15);
+        spawnEnemy(3,"enemy3",25);
     }
     public static void wave6(){
         fullEnemies = 1;
