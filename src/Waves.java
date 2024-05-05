@@ -39,6 +39,9 @@ public class Waves {
             case 6:
                 wave6();
                 break;
+            case 7:
+                wave7();
+                break;
         }
         if (showWaveIcon()) {
             wave = false;
@@ -100,6 +103,12 @@ public class Waves {
     public static void wave6(){
         fullEnemies = 1;
         spawnEnemy(1,"enemy4",1);
+    }
+    public static void wave7(){
+        fullEnemies = 60;
+        spawnEnemy(6,"enemy1",15);
+        spawnEnemy(8,"enemy2",15);
+        spawnEnemy(3,"enemy3",30);
     }
 
 }
