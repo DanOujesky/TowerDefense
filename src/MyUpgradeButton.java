@@ -34,11 +34,9 @@ public class MyUpgradeButton extends JButton {
                 case 2:
                     if (CoinBar.COINS > tower.getUpgradeValues()[2]) {
                         CoinBar.COINS -= tower.getUpgradeValues()[2];
-                        setIcon(upgradeButtonImage);
                         tower.upgrade();
-                    } else {
-
                     }
+                    setIcon(upgradeButtonImage);
                     clickCount = 0;
 
                     break;
