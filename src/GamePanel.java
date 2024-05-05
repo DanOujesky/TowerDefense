@@ -11,7 +11,7 @@ public class GamePanel extends JPanel implements Runnable {
 
     public static final int WIDTH = 900;
     public static final int HEIGHT = 900;
-    public static final int FPS = 60;
+    public static int FPS = 60;
     private boolean gameOver = false;
     Thread gameThread;
     Background background;
@@ -22,6 +22,7 @@ public class GamePanel extends JPanel implements Runnable {
     CoinBar coinBar;
     JButton tower1 = new JButton(new ImageIcon("pictures/TowerButtons/TowerButton_1.png"));
     JButton canon = new JButton(new ImageIcon("pictures/TowerButtons/TowerButton_2.png"));
+    static JButton speedButton = new JButton(new ImageIcon("pictures/Speed_icons/Speed_icon_1x.png"));
     static JButton myWaveButton = new JButton(new ImageIcon("pictures/Wave_icon/Wave_icon.png"));
     public GamePanel(){
         this.setPreferredSize(new Dimension(WIDTH, HEIGHT));
@@ -31,7 +32,9 @@ public class GamePanel extends JPanel implements Runnable {
         this.setFocusable(true);
         this.add(tower1);
         this.add(canon);
+        this.add(speedButton);
         this.add(myWaveButton);
+
 
         background = new Background();
         towerManager = new TowerManager();
@@ -42,12 +45,16 @@ public class GamePanel extends JPanel implements Runnable {
 
         tower1.setBounds(120, 750, 100, 100);
         canon.setBounds(235, 750, 100, 100);
+        speedButton.setBounds(800, 750, 60, 60);
         myWaveButton.setBounds(0,Background.positionOfFirstTile(), myWaveButton.getIcon().getIconWidth(), myWaveButton.getIcon().getIconHeight());
         myWaveButton.setBorder(BorderFactory.createEmptyBorder());
+        speedButton.setBorder(BorderFactory.createEmptyBorder());
         myWaveButton.setContentAreaFilled(false);
+        speedButton.setContentAreaFilled(false);
 
         tower1.addActionListener(new MyTowerButtonListener("Tower_1"));
         canon.addActionListener(new MyTowerButtonListener("Canon_1"));
+        speedButton.addActionListener(new SpeedButtonListener());
         myWaveButton.addActionListener(new MyWaveButtonListener());
     }
     public void launchGame(){
@@ -71,6 +78,12 @@ public class GamePanel extends JPanel implements Runnable {
 
             if (delta >= 1) {
                 update();
+                if (SpeedButtonListener.speed == 2) {
+                    update();
+                }  if (SpeedButtonListener.speed == 4) {
+                    update();
+                    update();
+                }
                 repaint();
                 delta--;
                 if (HealthBar.HEALTH < 1) {
