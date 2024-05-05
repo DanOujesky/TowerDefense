@@ -15,6 +15,7 @@ public class Tower {
     private Rectangle towerBounds;
     private boolean towerMenu = false;
     private MyUpgradeButton upgradeButton;
+    private MySellButton mySellButton;
     int level;
     int maxLevel;
 
@@ -94,8 +95,11 @@ public class Tower {
                 CoinBar.COINS -= prize;
                 Window.addButton(new TowerButton(this));
                 upgradeButton = new MyUpgradeButton(this);
+                mySellButton = new MySellButton(this);
                 Window.addButton(upgradeButton);
+                Window.addButton(mySellButton);
             }
+            if (MyMouseListener.rightMousePressed) TowerManager.removeTower(this);
         } else {
             if (!isCooldownOver()) {
                 clock++;
@@ -113,11 +117,15 @@ public class Tower {
                 if (!upgradeButton.isVisible()) {
                     upgradeButton.clickCount = 0;
                     upgradeButton.changeIcon();
+                    mySellButton.clickCount = 0;
+                    mySellButton.changeIcon();
                     upgradeButton.setVisible(true);
+                    mySellButton.setVisible(true);
                 }
             } else {
                 if (upgradeButton.isVisible()) {
                     upgradeButton.setVisible(false);
+                    mySellButton.setVisible(false);
                 }
             }
         }
@@ -150,6 +158,9 @@ public class Tower {
             graphics2D.drawOval((int) x - range/2, (int) y - range/2, this.range, this.range);
             if (upgradeButton.collisionWithMouse()) {
                 upgradeButton.draw(graphics2D);
+            }
+            if (mySellButton.collisionWithMouse()) {
+                mySellButton.draw(graphics2D);
             }
         } else {
             if (collisionWithMouse()) {
@@ -253,5 +264,13 @@ public class Tower {
 
     public double getAttackSpeed() {
         return attackSpeed;
+    }
+
+    public MyUpgradeButton getUpgradeButton() {
+        return upgradeButton;
+    }
+
+    public MySellButton getMySellButton() {
+        return mySellButton;
     }
 }
