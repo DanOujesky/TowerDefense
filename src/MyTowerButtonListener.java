@@ -12,6 +12,7 @@ public class MyTowerButtonListener implements ActionListener {
     }
     @Override
     public void actionPerformed(ActionEvent e) {
+        MyMouseListener.leftMouseClicked = false;
         TowerManager.addTower(towerName);
 
     }
