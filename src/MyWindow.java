@@ -1,11 +1,10 @@
 import javax.swing.*;
-import java.awt.*;
 
-public class Window extends JFrame {
+public class MyWindow extends JFrame {
 
     static JFrame window;
     static GamePanel gamePanel;
-    public Window(){
+    public MyWindow(){
 
         window = new JFrame("Tower Defense");
         window.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
