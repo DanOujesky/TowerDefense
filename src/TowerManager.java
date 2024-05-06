@@ -1,7 +1,4 @@
 import java.awt.*;
-import java.awt.geom.AffineTransform;
-import java.awt.image.BufferedImage;
-import java.awt.image.ImageObserver;
 import java.io.File;
 import java.util.ArrayList;
 
@@ -61,8 +58,8 @@ public class TowerManager {
     }
     public static void sellTower(Tower tower){
         CoinBar.COINS += (int)tower.getPrize()/2;
-        Window.removeButton(tower.getMySellButton());
-        Window.removeButton(tower.getUpgradeButton());
+        MyWindow.removeButton(tower.getMySellButton());
+        MyWindow.removeButton(tower.getUpgradeButton());
         removeTower(tower);
     }
     public static void removeTower(Tower t) {

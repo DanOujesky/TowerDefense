@@ -1,5 +1,6 @@
 import javax.imageio.ImageIO;
 import java.awt.*;
+import java.awt.Window;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
@@ -10,12 +11,14 @@ public class Tower {
     private BufferedImage towerImage;
     String name;
     private boolean placeTower = false;
+    private boolean placeTowerFirst = false;
     private Enemy enemyTarget = null;
     private int clock;
     private Rectangle towerBounds;
     private boolean towerMenu = false;
     private MyUpgradeButton upgradeButton;
     private MySellButton mySellButton;
+    private MyMoveButton myMoveButton;
     int level;
     int maxLevel;
 
@@ -91,15 +94,18 @@ public class Tower {
             y =  MyMouseListener.positionY   - MyMouseListener.positionY%15;
             updateHitBox();
             if (MyMouseListener.letfMousePressed && TowerManager.isPlaceable(this) ) {
+                if (placeTowerFirst)CoinBar.COINS -= prize;
                 placeTower = false;
-                CoinBar.COINS -= prize;
-                Window.addButton(new TowerButton(this));
+                placeTowerFirst = false;
+                MyWindow.addButton(new TowerButton(this));
                 upgradeButton = new MyUpgradeButton(this);
                 mySellButton = new MySellButton(this);
-                Window.addButton(upgradeButton);
-                Window.addButton(mySellButton);
+                myMoveButton = new MyMoveButton(this);
+                MyWindow.addButton(upgradeButton);
+                MyWindow.addButton(mySellButton);
+                MyWindow.addButton(myMoveButton);
             }
-            if (MyMouseListener.rightMousePressed) TowerManager.removeTower(this);
+            if (placeTowerFirst) if (MyMouseListener.rightMousePressed) TowerManager.removeTower(this);
         } else {
             if (!isCooldownOver()) {
                 clock++;
@@ -119,6 +125,9 @@ public class Tower {
                     upgradeButton.changeIcon();
                     mySellButton.clickCount = 0;
                     mySellButton.changeIcon();
+                    myMoveButton.clickCount = 0;
+                    myMoveButton.changeIcon();
+                    myMoveButton.setVisible(true);
                     upgradeButton.setVisible(true);
                     mySellButton.setVisible(true);
                 }
@@ -126,6 +135,7 @@ public class Tower {
                 if (upgradeButton.isVisible()) {
                     upgradeButton.setVisible(false);
                     mySellButton.setVisible(false);
+                    myMoveButton.setVisible(false);
                 }
             }
         }
@@ -227,6 +237,7 @@ public class Tower {
     }
 
     public void setPlaceTower(boolean placeTower) {
+        this.placeTowerFirst = true;
         this.placeTower = placeTower;
     }
 
@@ -272,5 +283,13 @@ public class Tower {
 
     public MySellButton getMySellButton() {
         return mySellButton;
+    }
+
+    public void moveTower() {
+        towerMenu = false;
+        placeTower = true;
+        update();
+        TowerManager.removeTower(this);
+        TowerManager.addTower(this.name);
     }
 }
