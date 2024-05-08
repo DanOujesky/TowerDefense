@@ -14,10 +14,10 @@ public class TowerManager {
         }
         switch (name) {
             case "Tower_1":
-                towers.add(new Tower(0,0,12,1,10,3, new File("pictures/Towers/Tower_1.png"), "Tower_1", 200));
+                towers.add(new Tower(0,0,12,1,10,5, new File("pictures/Towers/Tower_1.png"), "Tower_1", 200));
                 break;
             case "Canon_1":
-                towers.add(new Tower(0,0,5,1,22,1, new File("pictures/Towers/Canon_1.png"), "Canon", 280));
+                towers.add(new Tower(0,0,5,1,22,5, new File("pictures/Towers/Canon_1.png"), "Canon_1", 280));
                 break;
         }
         if (towers.get(towers.size()-1).getPrize() <=  CoinBar.COINS) {
@@ -32,29 +32,19 @@ public class TowerManager {
             graphics2D.drawRect((int) (t.getX()-30), (int) (t.getY()-30),60,60);
         }
     }
-    public static boolean touchingTower(){
-        for (Tower t : towers) {
-            if (t.getTowerBounds().contains(MyMouseListener.positionX+30, MyMouseListener.positionY+30)) {
-                return true;
-            }
-        }
-        return false;
-    }
     public static boolean isPlaceable(Tower t){
-        boolean trueFalse = true;
         if (Background.isTowerPlaceable(t)){
-            for (Tower tower: towers) {
-                if (!tower.equals(t)) {
-                    if (t.getX() - tower.getX() <= 45 && t.getX() - tower.getX() >= -45 && t.getY() - tower.getY() <= 45 && t.getY() - tower.getY() >= -45){
-                        trueFalse = false;
-                        break;
+            for (int i = 0; i < towers.size(); i++) {
+                if (towers.indexOf(t) != i) {
+                    if (t.getX() - towers.get(i).getX() <= 45 && t.getX() - towers.get(i).getX() >= -45 && t.getY() - towers.get(i).getY() <= 45 && t.getY() - towers.get(i).getY() >= -45){
+                       return false;
                     }
                 }
             }
         } else {
-            trueFalse = false;
+            return false;
         }
-        return trueFalse;
+        return true;
     }
     public static void sellTower(Tower tower){
         CoinBar.COINS += (int)tower.getPrize()/2;

@@ -35,7 +35,7 @@ public class BulletManager {
         {
             case "Tower_1":
                 bullets.add(new Bullet(t.getX() - 30,t.getY()-30,xSpeed*10,ySpeed*10,t.getDamage(), rotate, new File("pictures/Bullets/Bullet_1.png")));
-            case "Canon" :
+            case "Canon_1" :
                 bullets.add(new Bullet(t.getX() - 30,t.getY()-30,xSpeed*10,ySpeed*10,t.getDamage(), rotate, new File("pictures/Bullets/Bullet_1.png")));
         }
 

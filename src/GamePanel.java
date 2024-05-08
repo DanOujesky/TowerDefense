@@ -20,11 +20,15 @@ public class GamePanel extends JPanel implements Runnable {
     BulletManager bulletManager;
     HealthBar healthBar;
     CoinBar coinBar;
-    JButton tower1 = new JButton(new ImageIcon("pictures/TowerButtons/TowerButton_1.png"));
-    JButton canon = new JButton(new ImageIcon("pictures/TowerButtons/TowerButton_2.png"));
+    TowerButton_1 tower1 = new TowerButton_1();
+    CanonButton_1 canon = new CanonButton_1();
     static JButton speedButton = new JButton(new ImageIcon("pictures/Speed_icons/Speed_icon_1x.png"));
-    static JButton myWaveButton = new JButton(new ImageIcon("pictures/Wave_icon/Wave_icon.png"));
     MyMouseListener myMouseListener = new MyMouseListener();
+    MySpellButton mySpellButton = new MySpellButton();
+
+    MySpellButtonFreeze mySpellButtonFreeze = new MySpellButtonFreeze();
+    Waves waves = new Waves();
+    MyWaveButton myWaveButton = new MyWaveButton(waves);
     public GamePanel(){
         this.setPreferredSize(new Dimension(WIDTH, HEIGHT));
         this.setLayout(null);
@@ -34,6 +38,8 @@ public class GamePanel extends JPanel implements Runnable {
         this.add(canon);
         this.add(speedButton);
         this.add(myWaveButton);
+        this.add(mySpellButton);
+        this.add(mySpellButtonFreeze);
 
 
         background = new Background();
@@ -41,21 +47,15 @@ public class GamePanel extends JPanel implements Runnable {
         enemyManager = new EnemyManager();
         bulletManager = new BulletManager();
         healthBar = new HealthBar(20);
-        coinBar = new CoinBar(21);
+        coinBar = new CoinBar(18);
 
-        tower1.setBounds(120, 750, 100, 100);
-        canon.setBounds(235, 750, 100, 100);
-        speedButton.setBounds(800, 750, 60, 60);
-        myWaveButton.setBounds(0,Background.positionOfFirstTile(), myWaveButton.getIcon().getIconWidth(), myWaveButton.getIcon().getIconHeight());
+        speedButton.setBounds(800, 800, 60, 60);
         myWaveButton.setBorder(BorderFactory.createEmptyBorder());
         speedButton.setBorder(BorderFactory.createEmptyBorder());
         myWaveButton.setContentAreaFilled(false);
         speedButton.setContentAreaFilled(false);
 
-        tower1.addActionListener(new MyTowerButtonListener("Tower_1"));
-        canon.addActionListener(new MyTowerButtonListener("Canon_1"));
         speedButton.addActionListener(new SpeedButtonListener());
-        myWaveButton.addActionListener(new MyWaveButtonListener());
     }
     public void launchGame(){
         gameThread = new Thread(this);
@@ -77,12 +77,15 @@ public class GamePanel extends JPanel implements Runnable {
             lastTime = currentTime;
 
             if (delta >= 1) {
-                update();
-                if (SpeedButtonListener.speed == 2) {
-                    update();
-                }  if (SpeedButtonListener.speed == 4) {
-                    update();
-                    update();
+                if (mySpellButtonFreeze.isFreezeWasUsed()) {
+                    mySpellButtonFreeze.decreaseTimer();
+                    if (mySpellButtonFreeze.run()) {
+                        updateAll(true);
+                    } else {
+                        updateAll(false);
+                    }
+                } else {
+                   updateAll(true);
                 }
                 repaint();
                 delta--;
@@ -91,29 +94,55 @@ public class GamePanel extends JPanel implements Runnable {
                 }
             }
         }
+        repaint();
+
 
     }
-    public void update(){
-        enemyManager.update();
+    public void updateAll(boolean enemyUpdate){
+        update(enemyUpdate);
+        if (SpeedButtonListener.speed == 2) {
+            update(enemyUpdate);
+        }  if (SpeedButtonListener.speed == 4) {
+            update(enemyUpdate);
+            update(enemyUpdate);
+        }
+    }
+    public void update(boolean enemyUpdate){
+        if (enemyUpdate) enemyManager.update();
         bulletManager.update();
         towerManager.update();
-        if (Waves.wave) {
-            Waves.update();
+        if (waves.wave) {
+            if (waves.resetColdowns) {
+                mySpellButtonFreeze.resetColdDown();
+                mySpellButton.resetColdDown();
+            }
+            waves.update();
         }
         myMouseListener.updatePositions();
-
-
     }
     public void paintComponent(Graphics graphics) {
         super.paintComponent(graphics);
 
         Graphics2D graphics2D = (Graphics2D) graphics;
         background.draw(graphics2D);
+        if (mySpellButton.isPlaceSpell()) mySpellButton.draw(graphics2D);
         healthBar.draw(graphics2D);
         enemyManager.draw(graphics2D);
         towerManager.draw(graphics2D);
         bulletManager.draw(graphics2D);
         coinBar.draw(graphics2D);
+        if (myWaveButton.visible) myWaveButton.draw(graphics2D);
+        if (gameOver && waves.waveCount != 13) {
+            graphics2D.setFont(new Font("Arial", 1,145));
+            graphics2D.setColor(Color.RED);
+            graphics2D.drawString("GAME OVER", 0,450);
+        }
+        if (waves.waveCount == 13) {
+            graphics2D.setFont(new Font("Arial", 1,145));
+            graphics2D.setColor(Color.YELLOW);
+            graphics2D.drawString("YOU WON", 0,450);
+            gameOver = true;
+        }
 
     }
 

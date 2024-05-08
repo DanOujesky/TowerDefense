@@ -19,7 +19,7 @@ public class MyUpgradeButton extends JButton {
         setIcon(upgradeButtonImage);
         this.setBorder(BorderFactory.createEmptyBorder());
         this.setContentAreaFilled(false);
-        this.setBounds((int) tower.getX()-15, (int) tower.getY()-(tower.getRange()/2)-15, upgradeButtonImage.getIconWidth()/2,upgradeButtonImage.getIconHeight()/2);
+        this.setBounds((int) tower.getX()-15, (int) tower.getY()-45, upgradeButtonImage.getIconWidth()/2,upgradeButtonImage.getIconHeight()/2);
         this.addActionListener(new MyUpgradeButtonListener(this));
     }
     public void changeIcon(){
@@ -32,7 +32,7 @@ public class MyUpgradeButton extends JButton {
                     setIcon(upgradeButtonImageClicked);
                     break;
                 case 2:
-                    if (CoinBar.COINS > tower.getUpgradeValues()[2]) {
+                    if (CoinBar.COINS >= tower.getUpgradeValues()[2]) {
                         CoinBar.COINS -= tower.getUpgradeValues()[2];
                         tower.upgrade();
                     }
