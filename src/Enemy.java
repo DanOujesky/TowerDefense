@@ -14,6 +14,7 @@ public class Enemy {
     private double currentEnemyHealth, maxEnemyHealth;
     private int damage;
     private int earnings;
+    private int freezeTime = 0;
     public Enemy(File file, double maxEnemyHealth, double movementSpeed, int damage, int earnings){
         try {
             enemy = ImageIO.read(file);
@@ -49,6 +50,9 @@ public class Enemy {
     }
 
     public void update() {
+        if (x > MySpellButton.positionX && x < MySpellButton.positionX+200 && y > MySpellButton.positionY && y < MySpellButton.positionY + 200 && MySpellButton.isDrawFire()) {
+            currentEnemyHealth--;
+        }
         switch (direction) {
             case 1:
                 x += movementSpeed;
