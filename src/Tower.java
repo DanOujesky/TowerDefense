@@ -11,17 +11,16 @@ public class Tower {
     private BufferedImage towerImage;
     String name;
     private boolean placeTower = false;
-    private boolean placeTowerFirst = false;
+    private boolean placeTowerFirst = true;
     private Enemy enemyTarget = null;
     private int clock;
     private Rectangle towerBounds;
     private boolean towerMenu = false;
     private MyUpgradeButton upgradeButton;
     private MySellButton mySellButton;
-    private MyMoveButton myMoveButton;
+    private TowerButton towerButton;
     int level;
     int maxLevel;
-
     public Tower(double x, double y, double attackSpeed,  double damage, double prize, int maxLevel, File towerFile, String name, int range) {
         try {
             towerImage = ImageIO.read(towerFile);
@@ -93,17 +92,16 @@ public class Tower {
             x = MyMouseListener.positionX     - MyMouseListener.positionX%15;
             y =  MyMouseListener.positionY   - MyMouseListener.positionY%15;
             updateHitBox();
-            if (MyMouseListener.letfMousePressed && TowerManager.isPlaceable(this) ) {
+            if (MyMouseListener.letfMousePressed && TowerManager.isPlaceable(this)) {
                 if (placeTowerFirst)CoinBar.COINS -= prize;
                 placeTower = false;
                 placeTowerFirst = false;
-                MyWindow.addButton(new TowerButton(this));
+                towerButton = new TowerButton(this);
                 upgradeButton = new MyUpgradeButton(this);
                 mySellButton = new MySellButton(this);
-                myMoveButton = new MyMoveButton(this);
+                MyWindow.addButton(towerButton);
                 MyWindow.addButton(upgradeButton);
                 MyWindow.addButton(mySellButton);
-                MyWindow.addButton(myMoveButton);
             }
             if (placeTowerFirst) if (MyMouseListener.rightMousePressed) TowerManager.removeTower(this);
         } else {
@@ -125,9 +123,6 @@ public class Tower {
                     upgradeButton.changeIcon();
                     mySellButton.clickCount = 0;
                     mySellButton.changeIcon();
-                    myMoveButton.clickCount = 0;
-                    myMoveButton.changeIcon();
-                    myMoveButton.setVisible(true);
                     upgradeButton.setVisible(true);
                     mySellButton.setVisible(true);
                 }
@@ -135,7 +130,6 @@ public class Tower {
                 if (upgradeButton.isVisible()) {
                     upgradeButton.setVisible(false);
                     mySellButton.setVisible(false);
-                    myMoveButton.setVisible(false);
                 }
             }
         }
@@ -203,12 +197,36 @@ public class Tower {
                         towerValues[1] = (int) (attackSpeed - 2);
                         towerValues[2] = 5;
                         towerValues[3] = range + 5;
+                        break;
+                    case 3:
+                        towerValues[0] = (int) (damage + 2);
+                        towerValues[2] = 20;
+                        break;
+                    case 4:
+                        towerValues[2] = 9;
+                        towerValues[3] = range + 20;
+                        break;
+
                 }
                 break;
             case "Canon_1":
                 switch (level) {
                     case 1:
-
+                        towerValues[0] = (int) (damage + 1);
+                        towerValues[2] = 23;
+                        break;
+                    case 2:
+                        towerValues[2]= 12;
+                        towerValues[3] = range + 20;
+                        break;
+                    case 3:
+                        towerValues[2]= 10;
+                        towerValues[3] = range + 20;
+                        break;
+                    case 4:
+                        towerValues [2] = 5;
+                        towerValues[1] = (int) (attackSpeed - 3);
+                        break;
                 }
 
         }
@@ -237,8 +255,11 @@ public class Tower {
     }
 
     public void setPlaceTower(boolean placeTower) {
-        this.placeTowerFirst = true;
         this.placeTower = placeTower;
+    }
+
+    public void setPlaceTowerFirst(boolean placeTowerFirst) {
+        this.placeTowerFirst = placeTowerFirst;
     }
 
     public double getPrize() {
@@ -288,8 +309,11 @@ public class Tower {
     public void moveTower() {
         towerMenu = false;
         placeTower = true;
-        update();
-        TowerManager.removeTower(this);
-        TowerManager.addTower(this.name);
+        placeTowerFirst = false;
+        MyWindow.removeButton(towerButton);
+    }
+
+    public BufferedImage getTowerImage() {
+        return towerImage;
     }
 }
