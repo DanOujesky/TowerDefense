@@ -12,7 +12,7 @@ public class MySellButton extends JButton {
         setIcon(sellButtonImage);
         this.setBorder(BorderFactory.createEmptyBorder());
         this.setContentAreaFilled(false);
-        this.setBounds((int) tower.getX()-15, (int) tower.getY()+(tower.getRange()/2)-15, sellButtonImage.getIconWidth()/2,sellButtonImage.getIconHeight()/2);
+        this.setBounds((int) tower.getX()-15, (int) tower.getY()+15, sellButtonImage.getIconWidth()/2,sellButtonImage.getIconHeight()/2);
         this.addActionListener(new MySellButtonListener(this));
     }
 
@@ -30,7 +30,6 @@ public class MySellButton extends JButton {
 
         }
     }
-
     public boolean collisionWithMouse() {
         return this.getBounds().contains(MyMouseListener.positionX, MyMouseListener.positionY);
     }
