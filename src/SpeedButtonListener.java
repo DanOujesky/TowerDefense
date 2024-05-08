@@ -3,7 +3,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 public class SpeedButtonListener implements ActionListener {
-    static int speed = 1;
+    public static int speed = 1;
     @Override
     public void actionPerformed(ActionEvent e) {
         switch (speed) {
