@@ -1,4 +1,5 @@
 import javax.swing.*;
+import java.awt.*;
 
 public class MyWindow extends JFrame {
 
@@ -17,7 +18,7 @@ public class MyWindow extends JFrame {
         window.setLocationRelativeTo(null);
         window.setVisible(true);
 
-        gamePanel.launchGame();
+        gamePanel.showTowerMenu();
     }
     public static void addButton(JButton jButton){
         gamePanel.add(jButton);
