@@ -30,14 +30,20 @@ public class GamePanel extends JPanel implements Runnable {
     Waves waves = new Waves();
     MyWaveButton myWaveButton = new MyWaveButton(waves);
     PlayButton playButton;
+    SettingsButton settingsButton;
+    ExitButton exitButton;
     public GamePanel(){
         this.setPreferredSize(new Dimension(WIDTH, HEIGHT));
         this.setLayout(null);
         playButton = new PlayButton(this);
+        settingsButton = new SettingsButton(this);
+        exitButton = new ExitButton(this);
 
     }
-    public void showTowerMenu() {
+    public void showGameMenu() {
         this.add(playButton);
+        this.add(settingsButton);
+        this.add(exitButton);
     }
     public void launchGame(){
 
@@ -131,27 +137,38 @@ public class GamePanel extends JPanel implements Runnable {
         super.paintComponent(graphics);
 
         Graphics2D graphics2D = (Graphics2D) graphics;
-        background.draw(graphics2D);
-        if (mySpellButton.isPlaceSpell()) mySpellButton.draw(graphics2D);
-        healthBar.draw(graphics2D);
-        enemyManager.draw(graphics2D);
-        towerManager.draw(graphics2D);
-        bulletManager.draw(graphics2D);
-        coinBar.draw(graphics2D);
-        if (myWaveButton.visible) myWaveButton.draw(graphics2D);
-        if (gameOver && waves.waveCount != 13) {
-            graphics2D.setFont(new Font("Arial", 1,145));
-            graphics2D.setColor(Color.RED);
-            graphics2D.drawString("GAME OVER", 0,450);
-        }
-        if (waves.waveCount == 13) {
-            graphics2D.setFont(new Font("Arial", 1,145));
-            graphics2D.setColor(Color.YELLOW);
-            graphics2D.drawString("YOU WON", 0,450);
-            gameOver = true;
-        }
+        try {
+            background.draw(graphics2D);
+            if (mySpellButton.isPlaceSpell()) mySpellButton.draw(graphics2D);
+            healthBar.draw(graphics2D);
+            enemyManager.draw(graphics2D);
+            towerManager.draw(graphics2D);
+            bulletManager.draw(graphics2D);
+            coinBar.draw(graphics2D);
+            if (myWaveButton.visible) myWaveButton.draw(graphics2D);
+            if (gameOver && waves.waveCount != 13) {
+                graphics2D.setFont(new Font("Arial", 1,145));
+                graphics2D.setColor(Color.RED);
+                graphics2D.drawString("GAME OVER", 0,450);
+            }
+            if (waves.waveCount == 13) {
+                graphics2D.setFont(new Font("Arial", 1,145));
+                graphics2D.setColor(Color.YELLOW);
+                graphics2D.drawString("YOU WON", 50,450);
+                gameOver = true;
+            }
+        }catch (NullPointerException e) {}
+
+
 
     }
 
+
+    public void hideGameMenu() {
+        settingsButton.setVisible(false);
+        playButton.setVisible(false);
+        exitButton.setVisible(false);
+
+    }
 
 }
