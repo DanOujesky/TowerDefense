@@ -12,6 +12,6 @@ public class PlayButtonListener implements ActionListener {
     @Override
     public void actionPerformed(ActionEvent e) {
         gamePanel.launchGame();
-        playButton.setVisible(false);
+        gamePanel.hideGameMenu();
     }
 }
