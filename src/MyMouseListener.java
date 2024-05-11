@@ -1,8 +1,10 @@
 
+import javax.management.monitor.Monitor;
 import java.awt.*;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.awt.event.MouseMotionListener;
+import java.lang.management.MonitorInfo;
 
 public class MyMouseListener implements MouseListener {
     public static double positionX;
@@ -10,6 +12,12 @@ public class MyMouseListener implements MouseListener {
     public static boolean letfMousePressed;
     public static boolean rightMousePressed;
     public static boolean leftMouseClicked;
+    Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
+    double myWidth = screenSize.getWidth();
+    double myHeight = screenSize.getHeight();
+    private final int marginX = (int) (myWidth/2 - 450);
+    private final int marginY = (int) (myHeight/2 - 450)-7;
+
     @Override
     public void mouseClicked(MouseEvent e) {
 
@@ -52,7 +60,7 @@ public class MyMouseListener implements MouseListener {
 
 
     public void updatePositions() {
-        positionX = MouseInfo.getPointerInfo().getLocation().getX()-510;
-        positionY = MouseInfo.getPointerInfo().getLocation().getY()-83;
+        positionX = MouseInfo.getPointerInfo().getLocation().getX()-marginX;
+        positionY = MouseInfo.getPointerInfo().getLocation().getY()-marginY;
     }
 }
