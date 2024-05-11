@@ -18,7 +18,7 @@ public class MyWindow extends JFrame {
         window.setLocationRelativeTo(null);
         window.setVisible(true);
 
-        gamePanel.showTowerMenu();
+        gamePanel.showGameMenu();
     }
     public static void addButton(JButton jButton){
         gamePanel.add(jButton);
