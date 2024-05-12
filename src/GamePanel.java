@@ -108,6 +108,12 @@ public class GamePanel extends JPanel implements Runnable {
             }
         }
         repaint();
+        try {
+            Thread.sleep(1000);
+        } catch (InterruptedException e) {
+            throw new RuntimeException(e);
+        }
+        System.exit(0);
 
 
     }
@@ -154,7 +160,7 @@ public class GamePanel extends JPanel implements Runnable {
             if (waves.waveCount == 13) {
                 graphics2D.setFont(new Font("Arial", 1,145));
                 graphics2D.setColor(Color.YELLOW);
-                graphics2D.drawString("YOU WON", 50,450);
+                graphics2D.drawString("YOU WON", 100,450);
                 gameOver = true;
             }
         }catch (NullPointerException e) {}
