@@ -8,7 +8,7 @@ import java.io.IOException;
 public class Tower {
     private double x,y, attackSpeed, damage, prize;
     private int range;
-    private BufferedImage towerImage;
+    private BufferedImage towerImage, towerImageLevel2, towerImageLevel3, towerImageLevel4, towerImageLevel5;
     String name;
     private boolean placeTower = false;
     private boolean placeTowerFirst = true;
@@ -37,6 +37,25 @@ public class Tower {
         this.maxLevel = maxLevel;
         towerBounds = new Rectangle((int) x, (int)y,towerImage.getWidth(), towerImage.getHeight());
         level = 1;
+        if (name.equals("Tower_1")) {
+            try {
+                towerImageLevel2 = ImageIO.read(new File("pictures/Towers/Tower_1(level2).png"));
+                towerImageLevel3 = ImageIO.read(new File("pictures/Towers/Tower_1(level3).png"));
+                towerImageLevel4 = ImageIO.read(new File("pictures/Towers/Tower_1(level4).png"));
+                towerImageLevel5 = ImageIO.read(new File("pictures/Towers/Tower_1(level5).png"));
+            } catch (IOException e) {
+                throw new RuntimeException(e);
+            }
+        } else if (name.equals("Canon_1")) {
+            try {
+                towerImageLevel2 = ImageIO.read(new File("pictures/Towers/Canon_1(level2).png"));
+                towerImageLevel3 = ImageIO.read(new File("pictures/Towers/Canon_1(level3).png"));
+                towerImageLevel4 = ImageIO.read(new File("pictures/Towers/Canon_1(level4).png"));
+                towerImageLevel5 = ImageIO.read(new File("pictures/Towers/Canon_1(level5).png"));
+            } catch (IOException e) {
+                throw new RuntimeException(e);
+            }
+        }
     }
     public static int getDistance(double x1, double y1, double x2,  double y2){
         double xDiff = Math.abs(x1 -x2);
@@ -139,7 +158,23 @@ public class Tower {
     }
 
     public void rotateTower(double rotate) {
-       towerImage = Enemy.rotateImage(towerImage,rotate);
+        switch (level) {
+            case 1:
+                towerImage = Enemy.rotateImage(towerImage,rotate);
+                break;
+            case 2:
+                towerImageLevel2 = Enemy.rotateImage(towerImageLevel2,rotate);
+                break;
+            case 3:
+                towerImageLevel3 = Enemy.rotateImage(towerImageLevel3,rotate);
+                break;
+            case 4:
+                towerImageLevel4 = Enemy.rotateImage(towerImageLevel4,rotate);
+                break;
+            case 5:
+                towerImageLevel5 = Enemy.rotateImage(towerImageLevel5,rotate);
+                break;
+        }
     }
 
     public boolean isCooldownOver(){
@@ -153,7 +188,25 @@ public class Tower {
 
 
     public void draw(Graphics2D graphics2D) {
-        graphics2D.drawImage(towerImage, (int) x - 30, (int) y - 30, null);
+        switch (level) {
+            case 1:
+                graphics2D.drawImage(towerImage, (int) x - 30, (int) y - 30, null);
+                break;
+            case 2:
+                graphics2D.drawImage(towerImageLevel2, (int) x - 30, (int) y - 30, null);
+                break;
+            case 3:
+                graphics2D.drawImage(towerImageLevel3, (int) x - 30, (int) y - 30, null);
+                break;
+            case 4:
+                graphics2D.drawImage(towerImageLevel4, (int) x - 30, (int) y - 30, null);
+                break;
+            case 5:
+                graphics2D.drawImage(towerImageLevel5, (int) x - 30, (int) y - 30, null);
+                break;
+
+        }
+
         if (placeTower) {
             TowerManager.drawCollisionRect(graphics2D);
         }
@@ -306,11 +359,8 @@ public class Tower {
         return mySellButton;
     }
 
-    public void moveTower() {
-        towerMenu = false;
-        placeTower = true;
-        placeTowerFirst = false;
-        MyWindow.removeButton(towerButton);
+    public int getLevel() {
+        return level;
     }
 
     public BufferedImage getTowerImage() {
