@@ -64,8 +64,14 @@ public class Waves {
                 break;
         }
         if (showWaveIcon()) {
-            wave = false;
-            myWaveButton.setVisible(true);
+            if (waveCount < 12) {
+                wave = false;
+                myWaveButton.setVisible(true);
+            } else {
+                if (EnemyManager.getEnemies().isEmpty()) {
+                    enemiesCount = 13;
+                }
+            }
         }
     }
     public boolean showWaveIcon(){
@@ -152,10 +158,10 @@ public class Waves {
         spawnEnemy(6, "enemy4",5, "enemy4");
     }
     public void wave12(){
-        fullEnemies = 90;
+        fullEnemies = 80;
         spawnEnemy(1,"enemy1",24, "enemy1");
         spawnEnemy(2,"enemy2",30, "enemy11");
-        spawnEnemy(1,"enemy3",20, "enemy3");
+        spawnEnemy(1,"enemy3",10, "enemy3");
         spawnEnemy(3,"enemy3",15, "enemy33");
         spawnEnemy(12, "enemy5",1,"enemy5");
     }
