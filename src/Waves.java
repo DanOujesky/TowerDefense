@@ -152,11 +152,11 @@ public class Waves {
         spawnEnemy(6, "enemy4",5, "enemy4");
     }
     public void wave12(){
-        fullEnemies = 100;
-        spawnEnemy(1,"enemy1",29, "enemy1");
+        fullEnemies = 90;
+        spawnEnemy(1,"enemy1",24, "enemy1");
         spawnEnemy(2,"enemy2",30, "enemy11");
-        spawnEnemy(1,"enemy2",25, "enemy2");
-        spawnEnemy(3,"enemy2",15, "enemy22");
+        spawnEnemy(1,"enemy3",20, "enemy3");
+        spawnEnemy(3,"enemy3",15, "enemy33");
         spawnEnemy(12, "enemy5",1,"enemy5");
     }
 
