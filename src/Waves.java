@@ -69,7 +69,8 @@ public class Waves {
                 myWaveButton.setVisible(true);
             } else {
                 if (EnemyManager.getEnemies().isEmpty()) {
-                    enemiesCount = 13;
+                    waveCount = 13;
+                    wave = false;
                 }
             }
         }
