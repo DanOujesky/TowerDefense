@@ -1,7 +1,16 @@
 import java.awt.*;
+
+/**
+ * this class will generate a background
+ */
 public class Background {
     public static final int TILESIZE = 60;
     private static final int columnLenght = TILESIZE/4;
+
+    /**
+     * this method will draw all the tiles of the array on the screen
+     * @param graphics2D
+     */
     public void draw(Graphics2D graphics2D) {
 
         for (int x = 0; x < columnLenght; x++) {
@@ -35,6 +44,11 @@ public class Background {
             {1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1},
             {1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1}
     };
+
+    /**
+     * return position of first tile in first column
+     * @return
+     */
     public static int positionOfFirstTile(){
         int tilePosition;
         for (tilePosition = 0; tilePosition < columnLenght; tilePosition++) {
@@ -44,6 +58,14 @@ public class Background {
         }
         return tilePosition * TILESIZE;
     }
+
+    /**
+     * return true if next block is dirt
+     * @param x
+     * @param y
+     * @param direction
+     * @return
+     */
     public static boolean isNextDirt(double x, double y, int direction){
         boolean trueFalse = true;
         int tileX = (int) (y/TILESIZE);
@@ -72,6 +94,12 @@ public class Background {
         }
         return trueFalse;
     }
+
+    /**
+     * return true if tower is not touching dirt
+     * @param t
+     * @return
+     */
     public static boolean isTowerPlaceable(Tower t){
         int tileX = (int) ((t.getY())/TILESIZE);
         int tileY = (int) ((t.getX())/TILESIZE);

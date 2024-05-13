@@ -4,6 +4,9 @@ import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
 
+/**
+ * this class represents enemy
+ */
 public class Enemy {
     private double x,y;
     private boolean death = false;
@@ -15,6 +18,15 @@ public class Enemy {
     private int damage;
     private int earnings;
     private int freezeTime = 0;
+
+    /**
+     * assign all variables
+     * @param file
+     * @param maxEnemyHealth
+     * @param movementSpeed
+     * @param damage
+     * @param earnings
+     */
     public Enemy(File file, double maxEnemyHealth, double movementSpeed, int damage, int earnings){
         try {
             enemy = ImageIO.read(file);
@@ -31,6 +43,11 @@ public class Enemy {
         y = Background.positionOfFirstTile() + enemy.getHeight()/2;
         direction = 1;
     }
+
+    /**
+     * draw enemy on the screen
+     * @param graphics2D
+     */
     public void draw(Graphics2D graphics2D) {
         drawHealthBar(graphics2D);
         switch (direction) {
@@ -49,6 +66,9 @@ public class Enemy {
         }
     }
 
+    /**
+     * update enemy positions
+     */
     public void update() {
         if (x > MySpellButton.positionX && x < MySpellButton.positionX+200 && y > MySpellButton.positionY && y < MySpellButton.positionY + 200 && MySpellButton.isDrawFire()) {
             currentEnemyHealth--;
@@ -84,15 +104,29 @@ public class Enemy {
         updateHitBox();
     }
 
+    /**
+     * update hit box of the enemy
+     */
     private void updateHitBox() {
         enemyBounds.x = (int) x;
         enemyBounds.y = (int) y;
     }
+
+    /**
+     * draw enemy health bar
+     * @param graphics2D
+     */
     public void drawHealthBar(Graphics2D graphics2D){
         graphics2D.setColor(Color.RED);
         graphics2D.fillRect((int) x-22, (int) y-27, (int) (currentEnemyHealth/maxEnemyHealth*44),3);
     }
 
+    /**
+     * return rotated enemy image
+     * @param buffImage
+     * @param angle
+     * @return
+     */
     public static BufferedImage rotateImage(BufferedImage buffImage, double angle) {
         double radian = Math.toRadians(angle);
         double sin = Math.abs(Math.sin(radian));
@@ -125,6 +159,9 @@ public class Enemy {
         return death;
     }
 
+    /**
+     * checks if enemy can go straight if not then choose direction where he can go
+     */
     public void chooseDirection(){
         int pastDirection = direction;
         switch (direction) {

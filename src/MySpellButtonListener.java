@@ -1,6 +1,9 @@
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
+/**
+ * this class
+ */
 public class MySpellButtonListener implements ActionListener {
     MySpellButton mySpellButton;
     public MySpellButtonListener(MySpellButton mySpellButton) {

@@ -6,6 +6,9 @@ import java.awt.event.MouseListener;
 import java.awt.event.MouseMotionListener;
 import java.lang.management.MonitorInfo;
 
+/**
+ * this class have all the information about mouse
+ */
 public class MyMouseListener implements MouseListener {
     public static double positionX;
     public static double positionY;
@@ -59,6 +62,9 @@ public class MyMouseListener implements MouseListener {
     }
 
 
+    /**
+     * update mouse positions
+     */
     public void updatePositions() {
         positionX = MouseInfo.getPointerInfo().getLocation().getX()-marginX;
         positionY = MouseInfo.getPointerInfo().getLocation().getY()-marginY;

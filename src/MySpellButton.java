@@ -5,6 +5,9 @@ import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
 
+/**
+ * this class represents button
+ */
 public class MySpellButton extends JButton {
     ImageIcon mySpellButton = new ImageIcon("pictures/Spells/Spell_fire.png");
     ImageIcon mySpellButtonClicked = new ImageIcon("pictures/Spells/Spell_fire_clicked.png");
@@ -32,6 +35,9 @@ public class MySpellButton extends JButton {
     static int positionY;
     int timer;
 
+    /**
+     * assign variables
+     */
     public MySpellButton() {
         setIcon(mySpellButton);
         this.setBorder(BorderFactory.createEmptyBorder());
@@ -40,6 +46,9 @@ public class MySpellButton extends JButton {
         this.addActionListener(new MySpellButtonListener(this));
     }
 
+    /**
+     * this method will change icon after click
+     */
     public void changeIcon() {
         switch (clickCount) {
             case 0:
@@ -65,6 +74,11 @@ public class MySpellButton extends JButton {
 
         }
     }
+
+    /**
+     * this method will draw button on the screen
+     * @param graphics2D
+     */
     public void draw(Graphics2D graphics2D) {
         if (!spellWasUsed && !drawFire) {
             graphics2D.setColor(Color.black);
@@ -100,6 +114,10 @@ public class MySpellButton extends JButton {
 
 
     }
+
+    /**
+     * after click on the wave coldown will reset by one
+     */
     public void resetColdDown(){
         if (clickCount >= 3) {
             coldown++;
@@ -123,6 +141,10 @@ public class MySpellButton extends JButton {
         }
     }
 
+    /**
+     * if mouse is touching this buton it will return true
+     * @return
+     */
     public boolean collisionWithMouse() {
         return this.getBounds().contains(MyMouseListener.positionX, MyMouseListener.positionY);
     }

@@ -7,6 +7,9 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
 
+/**
+ * this class will create JPanel and creates a game thread
+ */
 public class GamePanel extends JPanel implements Runnable {
 
     public static final int WIDTH = 900;
@@ -32,6 +35,10 @@ public class GamePanel extends JPanel implements Runnable {
     PlayButton playButton;
     SettingsButton settingsButton;
     ExitButton exitButton;
+
+    /**
+     * assign variables
+     */
     public GamePanel(){
         this.setPreferredSize(new Dimension(WIDTH, HEIGHT));
         this.setLayout(null);
@@ -40,11 +47,19 @@ public class GamePanel extends JPanel implements Runnable {
         exitButton = new ExitButton(this);
 
     }
+
+    /**
+     * adds buttons to JFrame
+     */
     public void showGameMenu() {
         this.add(playButton);
         this.add(settingsButton);
         this.add(exitButton);
     }
+
+    /**
+     * adds buttons and create object and start a new thread
+     */
     public void launchGame(){
 
         this.addMouseListener(new MyMouseListener());
@@ -75,6 +90,10 @@ public class GamePanel extends JPanel implements Runnable {
         gameThread.start();
 
     }
+
+    /**
+     * every second it will call update and repaint methods
+     */
     @Override
     public void run() {
         double drawInterval = 1000000000/FPS;
@@ -109,6 +128,11 @@ public class GamePanel extends JPanel implements Runnable {
         }
         repaint();
     }
+
+    /**
+     * update all components
+     * @param enemyUpdate
+     */
     public void updateAll(boolean enemyUpdate){
         update(enemyUpdate);
         if (SpeedButtonListener.speed == 2) {
@@ -118,6 +142,11 @@ public class GamePanel extends JPanel implements Runnable {
             update(enemyUpdate);
         }
     }
+
+    /**
+     * update all components
+     * @param enemyUpdate
+     */
     public void update(boolean enemyUpdate){
         if (enemyUpdate) enemyManager.update();
         bulletManager.update();
@@ -131,6 +160,11 @@ public class GamePanel extends JPanel implements Runnable {
         }
         myMouseListener.updatePositions();
     }
+
+    /**
+     * draw all components
+     * @param graphics the <code>Graphics</code> object to protect
+     */
     public void paintComponent(Graphics graphics) {
         super.paintComponent(graphics);
 

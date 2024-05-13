@@ -2,14 +2,26 @@ import java.awt.*;
 import java.io.File;
 import java.util.ArrayList;
 
+/**
+ * this class records enemies
+ */
 public class EnemyManager {
     private static ArrayList<Enemy> enemies;
+
+    /**
+     * create new arraylist
+     */
     public EnemyManager(){
         enemies = new ArrayList<>();
     }
     public static ArrayList<Enemy> getEnemies(){
         return enemies;
     }
+
+    /**
+     * this method will add enemy depends on their name
+     * @param name
+     */
     public static void addEnemy(String name){
         switch (name) {
             case "enemy1":
@@ -31,7 +43,9 @@ public class EnemyManager {
     }
 
 
-
+    /**
+     * updates all the enemies
+     */
     public void update() {
         if (!enemies.isEmpty()) {
             for (int i =0; i < enemies.size(); i++) {
@@ -43,6 +57,10 @@ public class EnemyManager {
         }
     }
 
+    /**
+     * draw enemies on the screen
+     * @param graphics2D
+     */
     public void draw(Graphics2D graphics2D) {
         if (!enemies.isEmpty()) {
             for (int i = 0; i < enemies.size(); i++) {

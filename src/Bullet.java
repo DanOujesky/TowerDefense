@@ -5,12 +5,25 @@ import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
 
+/**
+ * bullet
+ */
 public class Bullet {
 
     private double x,y, Xspeed, Yspeed, damage, rotation;
     private boolean isDeath;
     BufferedImage bulletImage;
 
+    /**
+     * assign all variables
+     * @param x
+     * @param y
+     * @param Xspeed
+     * @param Yspeed
+     * @param damage
+     * @param rotation
+     * @param bulletFile
+     */
     public Bullet(double x, double y, double Xspeed, double Yspeed,double damage, double rotation, File bulletFile) {
         this.x = x;
         this.y = y;
@@ -27,7 +40,9 @@ public class Bullet {
     }
 
 
-
+    /**
+     * updates position of bullet
+     */
     public void update() {
         x += Xspeed;
         y += Yspeed;
@@ -36,6 +51,10 @@ public class Bullet {
         }
     }
 
+    /**
+     * checks if enemy is touching bullet
+     * @return
+     */
     private boolean checkCollisionWithEnemy() {
         boolean trueFalse = false;
         for (int i =0; i < EnemyManager.getEnemies().size(); i++) {
@@ -53,6 +72,10 @@ public class Bullet {
     }
 
 
+    /**
+     * draw bullet on screen
+     * @param graphics2D
+     */
     public void draw(Graphics2D graphics2D) {
         graphics2D.drawImage(bulletImage, (int)x,(int)y,null);
     }

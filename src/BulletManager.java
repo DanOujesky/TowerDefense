@@ -2,11 +2,23 @@ import java.awt.*;
 import java.io.File;
 import java.util.ArrayList;
 
+/**
+ * this class records bullets
+ */
 public class BulletManager {
     private static ArrayList<Bullet> bullets;
+
+    /**
+     * create new arraylist
+     */
     public BulletManager(){
         bullets = new ArrayList<>();
     }
+
+    /**
+     * this method will calculate speed of the bullet and then create bullet
+     * @param t
+     */
     public static void newBullet(Tower t){
         int  xDist = (int) (t.getX() - t.getEnemyTarget().getX());
         int  yDist = (int) (t.getY() - t.getEnemyTarget().getY());
@@ -73,6 +85,10 @@ public class BulletManager {
 
 
     }
+
+    /**
+     * updates all bullets that are in arraylist
+     */
     public void update() {
         if (!bullets.isEmpty()) {
             for (int i =0; i < bullets.size(); i++) {
@@ -84,6 +100,10 @@ public class BulletManager {
         }
     }
 
+    /**
+     * draw all bullets on the screen
+     * @param graphics2D
+     */
     public void draw(Graphics2D graphics2D) {
         if (!bullets.isEmpty()) {
             for (int i = 0; i < bullets.size(); i++) {

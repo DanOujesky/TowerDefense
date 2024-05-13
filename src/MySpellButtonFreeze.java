@@ -1,6 +1,9 @@
 import javax.swing.*;
 import java.awt.*;
 
+/**
+ * this class represents freeze button
+ */
 public class MySpellButtonFreeze extends JButton {
 
 
@@ -16,6 +19,9 @@ public class MySpellButtonFreeze extends JButton {
     private int slowForSeconds = 240;
     private int coldown = 0;
 
+    /**
+     * assign variables
+     */
     public MySpellButtonFreeze() {
         setIcon(mySpellButtonFreeze);
         this.setBorder(BorderFactory.createEmptyBorder());
@@ -23,10 +29,18 @@ public class MySpellButtonFreeze extends JButton {
         this.setBounds(620,800, 60,60);
         this.addActionListener(new MySpellButtonFreezeListener(this));
     }
+
+    /**
+     * this method start the timer
+     */
     public void startTimer(){
         timer = 0;
         freezeWasUsed = true;
     }
+
+    /**
+     * this method will decrease the timer
+     */
     public void decreaseTimer(){
         timer++;
         if (timer % slowForSeconds == 0) {
@@ -36,6 +50,10 @@ public class MySpellButtonFreeze extends JButton {
             changeIcon();
         }
     }
+
+    /**
+     * this method will reset coldown
+     */
     public void resetColdDown(){
         if (clickCount >= 3) {
             coldown++;
@@ -52,10 +70,18 @@ public class MySpellButtonFreeze extends JButton {
         }
 
     }
+
+    /**
+     *
+     * @return
+     */
     public boolean run(){
         return timer % slow == 0;
     }
 
+    /**
+     * this method will change the button icon after click count
+     */
     public void changeIcon() {
         switch (clickCount) {
             case 0:
@@ -74,6 +100,10 @@ public class MySpellButtonFreeze extends JButton {
         }
     }
 
+    /**
+     * this method will return true if mouse is touching button
+     * @return
+     */
     public boolean collisionWithMouse() {
         return this.getBounds().contains(MyMouseListener.positionX, MyMouseListener.positionY);
     }
