@@ -5,11 +5,17 @@ import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
 
+/**
+ * this class have all the background blocks
+ */
 public class Tile {
 
     final static BufferedImage GRASS;
     final static BufferedImage DIRT;
 
+    /**
+     * read images
+     */
     static {
         try {
             GRASS = ImageIO.read(new File("pictures/Tiles/GRASS.png"));

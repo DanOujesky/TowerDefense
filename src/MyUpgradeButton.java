@@ -14,6 +14,10 @@ public class MyUpgradeButton extends JButton {
     int clickCount;
     Tower tower;
 
+    /**
+     * assign values
+     * @param tower
+     */
     public MyUpgradeButton(Tower tower) {
         this.tower = tower;
         setIcon(upgradeButtonImage);
@@ -22,6 +26,10 @@ public class MyUpgradeButton extends JButton {
         this.setBounds((int) tower.getX()-15, (int) tower.getY()-45, upgradeButtonImage.getIconWidth()/2,upgradeButtonImage.getIconHeight()/2);
         this.addActionListener(new MyUpgradeButtonListener(this));
     }
+
+    /**
+     * this method will change icon according to click count
+     */
     public void changeIcon(){
         if (tower.level < tower.maxLevel) {
             switch (clickCount) {
@@ -45,6 +53,11 @@ public class MyUpgradeButton extends JButton {
         }
 
     }
+
+    /**
+     * if mouse is touching button it will return true
+     * @return
+     */
     public boolean collisionWithMouse(){
         return this.getBounds().contains(MyMouseListener.positionX, MyMouseListener.positionY);
     }
@@ -58,6 +71,10 @@ public class MyUpgradeButton extends JButton {
         this.clickCount = clickCount;
     }
 
+    /**
+     * this method will draw upgrade values on the screen
+     * @param graphics2D
+     */
     public void draw(Graphics2D graphics2D) {
         graphics2D.setColor(Color.black);
         graphics2D.fillRect(320, 10, 170,100);
@@ -75,6 +92,14 @@ public class MyUpgradeButton extends JButton {
 
 
     }
+
+    /**
+     * this method will add enters to the string
+     * @param graphics2D
+     * @param text
+     * @param x
+     * @param y
+     */
     private void drawStringWithEnters(Graphics2D graphics2D, String text, int x, int y) {
         for (String line : text.split("\n"))
             graphics2D.drawString(line, x, y += graphics2D.getFontMetrics().getHeight());

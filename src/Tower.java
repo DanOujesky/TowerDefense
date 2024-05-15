@@ -5,6 +5,9 @@ import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
 
+/**
+ * this class represents tower
+ */
 public class Tower {
     private double x,y, attackSpeed, damage, prize;
     private int range;
@@ -21,6 +24,19 @@ public class Tower {
     private TowerButton towerButton;
     int level;
     int maxLevel;
+
+    /**
+     * assign values and variables
+     * @param x
+     * @param y
+     * @param attackSpeed
+     * @param damage
+     * @param prize
+     * @param maxLevel
+     * @param towerFile
+     * @param name
+     * @param range
+     */
     public Tower(double x, double y, double attackSpeed,  double damage, double prize, int maxLevel, File towerFile, String name, int range) {
         try {
             towerImage = ImageIO.read(towerFile);
@@ -57,15 +73,33 @@ public class Tower {
             }
         }
     }
+
+    /**
+     * this method will return the distance between tower and enemy
+     * @param x1
+     * @param y1
+     * @param x2
+     * @param y2
+     * @return
+     */
     public static int getDistance(double x1, double y1, double x2,  double y2){
         double xDiff = Math.abs(x1 -x2);
         double yDiff = Math.abs(y1 - y2);
         return (int) Math.hypot(xDiff, yDiff);
     }
+
+    /**
+     * this method will update hit box of the tower
+     */
     public void updateHitBox(){
         towerBounds.x = (int) x;
         towerBounds.y = (int) y;
     }
+
+    /**
+     * this method will return true if enemy is in the tower range
+     * @return
+     */
     private boolean isThereEnemy(){
         boolean trueFalse = false;
         double range;
@@ -79,10 +113,19 @@ public class Tower {
         return trueFalse;
 
     }
+
+    /**
+     * this method will return true if enemy target is in the tower range
+     * @return
+     */
     private boolean checkEnemyTarget(){
         int range = getDistance(x , y,enemyTarget.getX(), enemyTarget.getY());
         return checkTowerRange(range);
     }
+
+    /**
+     * this method sets enemy target
+     */
     public void setEnemyTarget(){
         for (int i =0; i < EnemyManager.getEnemies().size(); i++) {
             double range = getDistance(x, y,EnemyManager.getEnemies().get(i).getX(), EnemyManager.getEnemies().get(i).getY());
@@ -92,9 +135,19 @@ public class Tower {
             }
         }
     }
+
+    /**
+     * this method will return if tower range is less than range between tower and enemy
+     * @param range
+     * @return
+     */
     public boolean checkTowerRange(double range){
         return range < this.range/2+16;
     }
+
+    /**
+     * if tower does not have enemy target it will set one, and then it will shoot a bullet
+     */
     public void shoot(){
         if (enemyTarget == null) {
             setEnemyTarget();
@@ -106,6 +159,9 @@ public class Tower {
         BulletManager.newBullet(this);
     }
 
+    /**
+     * this method updates tower position and tower shoots
+     */
     public void update() {
         if (placeTower) {
             x = MyMouseListener.positionX     - MyMouseListener.positionX%15;
@@ -157,6 +213,10 @@ public class Tower {
 
     }
 
+    /**
+     * this method will rotate tower by 90 degrees
+     * @param rotate
+     */
     public void rotateTower(double rotate) {
         switch (level) {
             case 1:
@@ -177,16 +237,26 @@ public class Tower {
         }
     }
 
+    /**
+     * this method will return true if turret coldown is over
+     * @return
+     */
     public boolean isCooldownOver(){
         return clock >= attackSpeed;
     }
+
+    /**
+     * this method will set clock to 0
+     */
     public void resetCooldown(){
         clock = 0;
     }
 
 
-
-
+    /**
+     * this method will draw tower on the screen
+     * @param graphics2D
+     */
     public void draw(Graphics2D graphics2D) {
         switch (level) {
             case 1:
@@ -226,6 +296,11 @@ public class Tower {
             }
         }
     }
+
+    /**
+     * this method will return true if mouse is touching the tower
+     * @return
+     */
     public boolean collisionWithMouse(){
         if (towerBounds.contains(MyMouseListener.positionX+30, MyMouseListener.positionY+30)){
             return true;
@@ -233,6 +308,11 @@ public class Tower {
             return false;
         }
     }
+
+    /**
+     * this method will return upgraded values
+     * @return
+     */
     public int[] getUpgradeValues(){
         int [] towerValues = new int[4];
         towerValues[0] = (int) damage;
@@ -339,6 +419,9 @@ public class Tower {
         return range;
     }
 
+    /**
+     * this method will increase tower level by one and set tower values to upgraded ones
+     */
     public void upgrade() {
         damage = getUpgradeValues()[0];
         attackSpeed = getUpgradeValues()[1];

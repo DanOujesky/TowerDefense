@@ -1,6 +1,9 @@
 import javax.swing.*;
 import java.awt.*;
 
+/**
+ * this class represents window of the game
+ */
 public class MyWindow extends JFrame {
 
     static JFrame window;
