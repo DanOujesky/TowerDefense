@@ -302,11 +302,7 @@ public class Tower {
      * @return
      */
     public boolean collisionWithMouse(){
-        if (towerBounds.contains(MyMouseListener.positionX+30, MyMouseListener.positionY+30)){
-            return true;
-        } else {
-            return false;
-        }
+        return towerBounds.contains(MyMouseListener.positionX + 30, MyMouseListener.positionY + 30);
     }
 
     /**

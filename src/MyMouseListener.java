@@ -18,8 +18,9 @@ public class MyMouseListener implements MouseListener {
     Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
     double myWidth = screenSize.getWidth();
     double myHeight = screenSize.getHeight();
-    private final int marginX = (int) (myWidth/2 - 450);
-    private final int marginY = (int) (myHeight/2 - 450)-7;
+    private final int marginX = (int) ((myWidth)/2 - 450);
+    private final int marginY = (int) ((myHeight)/2 - 450)-7;
+
 
     @Override
     public void mouseClicked(MouseEvent e) {
