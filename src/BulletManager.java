@@ -1,3 +1,5 @@
+import ExterníZdroje.createBullet;
+
 import java.awt.*;
 import java.io.File;
 import java.util.ArrayList;
@@ -20,28 +22,11 @@ public class BulletManager {
      * @param t
      */
     public static void newBullet(Tower t){
-        int  xDist = (int) (t.getX() - t.getEnemyTarget().getX());
-        int  yDist = (int) (t.getY() - t.getEnemyTarget().getY());
-        int totalDist = Math.abs(xDist) + Math.abs(yDist);
 
-        double xPer = (double) Math.abs(xDist) / totalDist;
-
-        double xSpeed = xPer * t.getEnemyTarget().getMovementSpeed();
-        double ySpeed = t.getEnemyTarget().getMovementSpeed() - xSpeed;
-
-
-        if (t.getX() > t.getEnemyTarget().getX()) {
-            xSpeed *= -1;
-        }
-        if (t.getY() > t.getEnemyTarget().getY()) {
-            ySpeed *= -1;
-        }
-        double arcValue = Math.atan(yDist / (double) xDist);
-        double rotate = Math.toDegrees(arcValue);
-
-        if (xDist < 0) {
-            rotate += 180;
-        }
+        double []values = createBullet.createBulletValues(t.getX(), t.getY(),t.getEnemyTarget().getX(), t.getEnemyTarget().getY(), t.getEnemyTarget().getMovementSpeed());
+        double xSpeed = values[0];
+        double ySpeed = values[1];
+        double rotate = values[2];
 
         switch (t.getName())
         {

@@ -1,3 +1,4 @@
+import ExterníZdroje.RotateImage;
 import javax.imageio.ImageIO;
 import java.awt.*;
 import java.awt.Window;
@@ -220,19 +221,19 @@ public class Tower {
     public void rotateTower(double rotate) {
         switch (level) {
             case 1:
-                towerImage = Enemy.rotateImage(towerImage,rotate);
+                towerImage = RotateImage.rotateImage(towerImage,rotate);
                 break;
             case 2:
-                towerImageLevel2 = Enemy.rotateImage(towerImageLevel2,rotate);
+                towerImageLevel2 = RotateImage.rotateImage(towerImageLevel2,rotate);
                 break;
             case 3:
-                towerImageLevel3 = Enemy.rotateImage(towerImageLevel3,rotate);
+                towerImageLevel3 = RotateImage.rotateImage(towerImageLevel3,rotate);
                 break;
             case 4:
-                towerImageLevel4 = Enemy.rotateImage(towerImageLevel4,rotate);
+                towerImageLevel4 = RotateImage.rotateImage(towerImageLevel4,rotate);
                 break;
             case 5:
-                towerImageLevel5 = Enemy.rotateImage(towerImageLevel5,rotate);
+                towerImageLevel5 = RotateImage.rotateImage(towerImageLevel5,rotate);
                 break;
         }
     }
