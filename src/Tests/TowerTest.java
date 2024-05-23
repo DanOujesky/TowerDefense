@@ -6,7 +6,14 @@ import Game.Tower;
 
 import java.awt.*;
 
+/**
+ * this class is used to test Tower class methods
+ */
+
 class TowerTest {
+    /**
+     * this method checks distance between tower and enemy
+     */
 
     @org.junit.jupiter.api.Test
     void getDistance() {
@@ -21,6 +28,9 @@ class TowerTest {
         Assertions.assertEquals(result, positions);
     }
 
+    /**
+     * this method checks collision between tower and mouse
+     */
     @Test
     void collisionWithMouse() {
 
@@ -30,6 +40,10 @@ class TowerTest {
 
         Assertions.assertTrue(towerBounds.contains(mousePositionX,mousePositionY));
     }
+
+    /**
+     * this method will check if tower range is smaller than distance between tower and enemy
+     */
 
     @Test
     void checkTowerRange() {

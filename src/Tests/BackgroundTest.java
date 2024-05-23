@@ -4,8 +4,15 @@ import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import Game.Background;
 
+/**
+ * this class is used to check Background methods
+ */
+
 class BackgroundTest {
 
+    /**
+     * this method checks if there is dirt on the specific position
+     */
     @Test
     void isNextDirt() {
         double enemyPositionX = 600;
@@ -21,6 +28,9 @@ class BackgroundTest {
 
     }
 
+    /**
+     * this method checks if the method found dirt in the first column
+     */
     @Test
     void positionOfFirstTile() {
         int columnLenght = 15;
