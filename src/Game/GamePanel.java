@@ -206,8 +206,7 @@ public class GamePanel extends JPanel implements Runnable {
     public void showBackgroundSelectionMenu() {
         backgroundButton1 = new BackgroundButton(this, "MAPA 1");
         backgroundButton2 = new BackgroundButton(this, "MAPA 2");
-        this.add(backgroundButton1);
-        this.add(backgroundButton2);
+
     }
 
     public void hideBackgroundSelectionMenu() {
