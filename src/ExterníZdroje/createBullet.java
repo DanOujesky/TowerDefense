@@ -1,7 +1,17 @@
 package ExterníZdroje;
 
+// source: https://www.youtube.com/watch?v=_HhIvNIlEqM&list=PL4rzdwizLaxb0-TajNIp5DOoT_PAxhx0T&index=25
 public class createBullet {
 
+    /**
+     * this method will create speedX and speedY for bullet
+     * @param towerX
+     * @param towerY
+     * @param enemyX
+     * @param enemyY
+     * @param enemyMovementSpeed
+     * @return
+     */
     public static double[] createBulletValues(double towerX, double towerY, double enemyX, double enemyY, double enemyMovementSpeed){
         int  xDist = (int) (towerX - enemyX);
         int  yDist = (int) (towerY - enemyY);
