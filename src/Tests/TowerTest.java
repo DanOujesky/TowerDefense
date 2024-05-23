@@ -2,6 +2,7 @@ package Tests;
 
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
+import Game.Tower;
 
 import java.awt.*;
 
@@ -33,8 +34,13 @@ class TowerTest {
     @Test
     void checkTowerRange() {
 
+        double towerPositionX = 1;
+        double enemyPositionX = 0;
+        double towerPositionY = 0;
+        double enemyPositionY = 5;
+
         int towerRange = 240/2+15;
-        int distanceBetweenTowerAndEnemy = 100;
+        double distanceBetweenTowerAndEnemy = Tower.getDistance(towerPositionX,towerPositionY,enemyPositionX,enemyPositionY);
         Assertions.assertTrue(towerRange > distanceBetweenTowerAndEnemy);
 
     }

@@ -4,10 +4,10 @@ import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import Game.Background;
 
-public class BackgroundTest {
+class BackgroundTest {
 
     @Test
-    public void isNextDirt() {
+    void isNextDirt() {
         double enemyPositionX = 600;
         double enemyPositionY = 0;
         int tileSize = 60;
