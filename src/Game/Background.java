@@ -8,7 +8,6 @@ import java.awt.*;
 public class Background {
     public static final int TILESIZE = 60;
     private static final int columnLenght = TILESIZE/4;
-    public static int[][] backgroundEditor;
 
     /**
      * this method will draw all the tiles of the array on the screen
@@ -30,15 +29,10 @@ public class Background {
             }
         }
     }
-    public Background (String mapa) {
-        if (mapa.equals("MAPA 1")) {
-            backgroundEditor = mapa1;
-        } else {
-            backgroundEditor = mapa2;
-        }
+    public Background () {
 
     }
-    public static int[][] mapa1 = {
+    public static int[][] backgroundEditor = {
             {1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1},
             {1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1},
             {1, 1, 1, 1, 2, 2, 2, 2, 2, 2, 2, 2, 1, 1, 1},
@@ -55,23 +49,7 @@ public class Background {
             {1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1},
             {1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1}
     };
-    public static int[][] mapa2 = {
-            {1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1},
-            {2, 2, 2, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1},
-            {1, 1, 2, 2, 2, 2, 2, 2, 2, 2, 1, 1, 1, 1, 1},
-            {1, 1, 1, 1, 1, 1, 1, 1, 1, 2, 1, 1, 1, 1, 1},
-            {1, 1, 1, 1, 1, 1, 1, 1, 2, 2, 1, 1, 1, 1, 1},
-            {1, 1, 1, 1, 2, 2, 2, 2, 2, 1, 1, 1, 1, 1, 1},
-            {1, 1, 1, 1, 2, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1},
-            {1, 1, 1, 1, 2, 1, 1, 1, 1, 2, 2, 2, 2, 1, 1},
-            {1, 1, 1, 1, 2, 1, 2, 2, 2, 2, 1, 1, 2, 1, 1},
-            {1, 1, 1, 1, 2, 1, 2, 1, 1, 1, 1, 1, 2, 2, 2},
-            {1, 1, 1, 1, 2, 2, 2, 1, 1, 1, 1, 1, 1, 1, 1},
-            {1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1},
-            {1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1},
-            {1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1},
-            {1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1}
-    };
+
 
 
     /**

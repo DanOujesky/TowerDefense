@@ -6,7 +6,7 @@ import javax.swing.*;
  * this class represents tower_1 button
  */
 public class TowerButton_1 extends JButton {
-    ImageIcon imageIcon = new ImageIcon("pictures/TowerButtons/Game.TowerButton_1.png");
+    ImageIcon imageIcon = new ImageIcon("pictures/TowerButtons/TowerButton_1.png");
 
     /**
      * assign values

@@ -27,7 +27,7 @@ public class GamePanel extends JPanel implements Runnable {
 
     MySpellButtonFreeze mySpellButtonFreeze = new MySpellButtonFreeze();
     Waves waves = new Waves();
-    MyWaveButton myWaveButton = new MyWaveButton(waves);
+    MyWaveButton myWaveButton;
     PlayButton playButton;
     SettingsButton settingsButton;
     ExitButton exitButton;
@@ -63,9 +63,9 @@ public class GamePanel extends JPanel implements Runnable {
         this.add(tower1);
         this.add(canon);
         this.add(speedButton);
-        this.add(myWaveButton);
         this.add(mySpellButton);
         this.add(mySpellButtonFreeze);
+
 
         background = new Background();
         towerManager = new TowerManager();
@@ -73,12 +73,14 @@ public class GamePanel extends JPanel implements Runnable {
         bulletManager = new BulletManager();
         healthBar = new HealthBar(20);
         coinBar = new CoinBar(18);
+        myWaveButton = new MyWaveButton(waves);
 
         speedButton.setBounds(800, 800, 60, 60);
         myWaveButton.setBorder(BorderFactory.createEmptyBorder());
         speedButton.setBorder(BorderFactory.createEmptyBorder());
         myWaveButton.setContentAreaFilled(false);
         speedButton.setContentAreaFilled(false);
+        this.add(myWaveButton);
 
         speedButton.addActionListener(new SpeedButtonListener());
 

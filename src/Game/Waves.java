@@ -74,6 +74,8 @@ public class Waves {
             case 12:
                 wave12();
                 break;
+            case 13:
+                break;
         }
         if (showWaveIcon()) {
             if (waveCount < 12) {
