@@ -44,6 +44,10 @@ public class EnemyManager {
         }
     }
 
+    public static void removeAllEnemies() {
+        enemies.removeAll(enemies);
+    }
+
 
     /**
      * updates all the enemies

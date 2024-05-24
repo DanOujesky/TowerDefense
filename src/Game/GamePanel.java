@@ -72,7 +72,7 @@ public class GamePanel extends JPanel implements Runnable {
         enemyManager = new EnemyManager();
         bulletManager = new BulletManager();
         healthBar = new HealthBar(20);
-        coinBar = new CoinBar(18);
+        coinBar = new CoinBar(9999);
         myWaveButton = new MyWaveButton(waves);
 
         speedButton.setBounds(800, 800, 60, 60);
@@ -155,6 +155,8 @@ public class GamePanel extends JPanel implements Runnable {
                 mySpellButton.resetColdDown();
             }
             waves.update();
+        } else if (waves.waveCount == 12){
+            waves.end();
         }
         myMouseListener.updatePositions();
     }

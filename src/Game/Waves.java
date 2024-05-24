@@ -23,7 +23,7 @@ public class Waves {
     public void startWave(MyWaveButton myWaveButton){
         this.myWaveButton = myWaveButton;
         resetColdowns = true;
-        waveCount++;
+        waveCount = 12;
         CoinBar.COINS += 3;
         timer = 0;
         enemiesCount = 0;
@@ -78,16 +78,24 @@ public class Waves {
                 break;
         }
         if (showWaveIcon()) {
+            wave = false;
             if (waveCount < 12) {
-                wave = false;
                 myWaveButton.setVisible(true);
-            } else {
-                if (EnemyManager.getEnemies().isEmpty()) {
-                    waveCount = 13;
-                    wave = false;
-                }
             }
         }
+    }
+
+    /**
+     * this method will end waves
+     */
+    public void end (){
+        if (EnemyManager.getEnemies().isEmpty()) {
+            waveCount = 13;
+        }
+    }
+
+    public int getWaveCount() {
+        return waveCount;
     }
 
     /**
@@ -235,7 +243,7 @@ public class Waves {
      * this method represents wave12
      */
     public void wave12(){
-        fullEnemies = 80;
+        fullEnemies = 1;
         spawnEnemy(1,"enemy1",24, "enemy1");
         spawnEnemy(2,"enemy2",30, "enemy11");
         spawnEnemy(1,"enemy3",10, "enemy3");
@@ -243,4 +251,11 @@ public class Waves {
         spawnEnemy(12, "enemy5",1,"enemy5");
     }
 
+    public int getEnemiesCount() {
+        return enemiesCount;
+    }
+
+    public void setEnemiesCount(int enemiesCount) {
+        this.enemiesCount = enemiesCount;
+    }
 }
