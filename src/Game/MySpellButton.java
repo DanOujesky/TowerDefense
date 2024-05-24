@@ -19,13 +19,7 @@ public class MySpellButton extends JButton {
     ImageIcon mySpellButtonLocked_coldown_3 = new ImageIcon("pictures/Spells/Spell_fire_coldown_3.png");
     static BufferedImage fireCircle;
 
-    static {
-        try {
-            fireCircle = ImageIO.read(new File("pictures/Spells/Spell_fire_circle.png"));
-        } catch (IOException e) {
-            throw new RuntimeException(e);
-        }
-    }
+
 
 
     int clickCount;
@@ -41,6 +35,11 @@ public class MySpellButton extends JButton {
      * assign variables
      */
     public MySpellButton() {
+        try {
+            fireCircle = ImageIO.read(new File("pictures/Spells/Spell_fire_circle.png"));
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
         setIcon(mySpellButton);
         this.setBorder(BorderFactory.createEmptyBorder());
         this.setContentAreaFilled(false);

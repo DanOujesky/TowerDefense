@@ -25,9 +25,9 @@ public class GamePanel extends JPanel implements Runnable {
     CanonButton_1 canon = new CanonButton_1();
     static JButton speedButton = new JButton(new ImageIcon("pictures/Speed_icons/Speed_icon_1x.png"));
     MyMouseListener myMouseListener = new MyMouseListener();
-    MySpellButton mySpellButton = new MySpellButton();
+    MySpellButton mySpellButton;
 
-    MySpellButtonFreeze mySpellButtonFreeze = new MySpellButtonFreeze();
+    MySpellButtonFreeze mySpellButtonFreeze;
     Waves waves = new Waves();
     MyWaveButton myWaveButton;
     PlayButton playButton;
@@ -77,6 +77,8 @@ public class GamePanel extends JPanel implements Runnable {
         healthBar = new HealthBar(20);
         coinBar = new CoinBar(18);
         myWaveButton = new MyWaveButton(waves);
+        mySpellButton =  new MySpellButton();
+        mySpellButtonFreeze = new MySpellButtonFreeze();
         this.add(myWaveButton);
 
         speedButton.setBounds(800, 800, 60, 60);
