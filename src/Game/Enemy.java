@@ -1,14 +1,10 @@
 package Game;
 
-import ExterníZdroje.RotateImage;
-import Game.Background;
-
 import javax.imageio.ImageIO;
 import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
-;
 
 /**
  * this class represents enemy
@@ -58,16 +54,16 @@ public class Enemy {
         drawHealthBar(graphics2D);
         switch (direction) {
             case 1:
-                graphics2D.drawImage(RotateImage.rotateImage(enemy, 0), (int) x - enemy.getWidth()/2, (int) y -  enemy.getHeight()/2 , null);
+                graphics2D.drawImage(rotateImage(enemy, 0), (int) x - enemy.getWidth()/2, (int) y -  enemy.getHeight()/2 , null);
                 break;
             case 2:
-                graphics2D.drawImage(RotateImage.rotateImage(enemy, 270), (int) x - enemy.getWidth()/2, (int) y -  enemy.getHeight()/2  , null);
+                graphics2D.drawImage(rotateImage(enemy, 270), (int) x - enemy.getWidth()/2, (int) y -  enemy.getHeight()/2  , null);
                 break;
             case 3:
-                graphics2D.drawImage(RotateImage.rotateImage(enemy, 180),(int) x - enemy.getWidth()/2, (int) y -  enemy.getHeight()/2  , null);
+                graphics2D.drawImage(rotateImage(enemy, 180),(int) x - enemy.getWidth()/2, (int) y -  enemy.getHeight()/2  , null);
                 break;
             case 4:
-                graphics2D.drawImage(RotateImage.rotateImage(enemy, 90), (int) x - enemy.getWidth()/2, (int) y -  enemy.getHeight()/2  , null);
+                graphics2D.drawImage(rotateImage(enemy, 90), (int) x - enemy.getWidth()/2, (int) y -  enemy.getHeight()/2  , null);
                 break;
         }
     }
@@ -125,6 +121,40 @@ public class Enemy {
     public void drawHealthBar(Graphics2D graphics2D){
         graphics2D.setColor(Color.RED);
         graphics2D.fillRect((int) x-22, (int) y-27, (int) (currentEnemyHealth/maxEnemyHealth*44),3);
+    }
+
+    /**
+     * return rotated enemy image
+     * @param buffImage
+     * @param angle
+     * @return
+     */
+    public static BufferedImage rotateImage(BufferedImage buffImage, double angle) {
+        double radian = Math.toRadians(angle);
+        double sin = Math.abs(Math.sin(radian));
+        double cos = Math.abs(Math.cos(radian));
+
+        int width = buffImage.getWidth();
+        int height = buffImage.getHeight();
+
+        int nWidth = (int) Math.floor((double) width * cos + (double) height * sin);
+        int nHeight = (int) Math.floor((double) height * cos + (double) width * sin);
+
+        BufferedImage rotatedImage = new BufferedImage(
+                nWidth, nHeight, BufferedImage.TYPE_INT_ARGB);
+
+        Graphics2D graphics = rotatedImage.createGraphics();
+
+        graphics.setRenderingHint(
+                RenderingHints.KEY_INTERPOLATION,
+                RenderingHints.VALUE_INTERPOLATION_BICUBIC);
+
+        graphics.translate((nWidth - width) / 2, (nHeight - height) / 2);
+        graphics.rotate(radian, (double) (width / 2), (double) (height / 2));
+        graphics.drawImage(buffImage, 0, 0, null);
+        graphics.dispose();
+
+        return rotatedImage;
     }
 
     public boolean isDeath() {

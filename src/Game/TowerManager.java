@@ -1,7 +1,5 @@
 package Game;
 
-import Game.Background;
-
 import java.awt.*;
 import java.io.File;
 import java.util.ArrayList;

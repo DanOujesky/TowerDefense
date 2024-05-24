@@ -1,7 +1,5 @@
 package Game;
 
-import Game.Background;
-
 import javax.swing.*;
 import java.awt.*;
 
@@ -18,7 +16,7 @@ public class MyWaveButton extends JButton {
      */
     public MyWaveButton(Waves waves){
         this.waves = waves;
-        this.setBounds(0, Background.positionOfFirstTile(), 75,60);
+        this.setBounds(0,Background.positionOfFirstTile(), 75,60);
         this.setBorder(BorderFactory.createEmptyBorder());
         this.setContentAreaFilled(false);
         this.addActionListener(new MyWaveButtonListener(waves, this));

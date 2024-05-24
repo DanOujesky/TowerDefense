@@ -1,7 +1,5 @@
 package Game;
 
-import Game.Background;
-
 import javax.swing.*;
 import java.awt.*;
 
@@ -29,12 +27,10 @@ public class GamePanel extends JPanel implements Runnable {
 
     MySpellButtonFreeze mySpellButtonFreeze = new MySpellButtonFreeze();
     Waves waves = new Waves();
-    MyWaveButton myWaveButton;
+    MyWaveButton myWaveButton = new MyWaveButton(waves);
     PlayButton playButton;
     SettingsButton settingsButton;
     ExitButton exitButton;
-    BackgroundButton backgroundButton1;
-    BackgroundButton backgroundButton2;
 
     /**
      * assign variables
@@ -60,24 +56,23 @@ public class GamePanel extends JPanel implements Runnable {
     /**
      * adds buttons and create object and start a new thread
      */
-    public void launchGame(String mapa){
+    public void launchGame(){
 
         this.addMouseListener(new MyMouseListener());
         this.setFocusable(true);
         this.add(tower1);
         this.add(canon);
         this.add(speedButton);
+        this.add(myWaveButton);
         this.add(mySpellButton);
         this.add(mySpellButtonFreeze);
 
-        background = new Background(mapa);
+        background = new Background();
         towerManager = new TowerManager();
         enemyManager = new EnemyManager();
         bulletManager = new BulletManager();
         healthBar = new HealthBar(20);
         coinBar = new CoinBar(18);
-        myWaveButton = new MyWaveButton(waves);
-        this.add(myWaveButton);
 
         speedButton.setBounds(800, 800, 60, 60);
         myWaveButton.setBorder(BorderFactory.createEmptyBorder());
@@ -203,14 +198,4 @@ public class GamePanel extends JPanel implements Runnable {
 
     }
 
-    public void showBackgroundSelectionMenu() {
-        backgroundButton1 = new BackgroundButton(this, "MAPA 1");
-        backgroundButton2 = new BackgroundButton(this, "MAPA 2");
-
-    }
-
-    public void hideBackgroundSelectionMenu() {
-        backgroundButton1.setVisible(false);
-        backgroundButton2.setVisible(false);
-    }
 }
