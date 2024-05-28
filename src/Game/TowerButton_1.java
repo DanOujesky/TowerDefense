@@ -1,7 +1,6 @@
 package Game;
 
 import javax.swing.*;
-import java.awt.*;
 
 /**
  * this class represents tower_1 button

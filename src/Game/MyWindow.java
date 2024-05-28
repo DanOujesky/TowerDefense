@@ -1,7 +1,6 @@
 package Game;
 
 import javax.swing.*;
-import java.awt.*;
 
 /**
  * this class represents window of the game
@@ -12,7 +11,7 @@ public class MyWindow extends JFrame {
     static GamePanel gamePanel;
     public MyWindow(){
 
-        window = new JFrame("Tower Defense");
+        window = new JFrame("Game.Tower Defense");
         window.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         window.setResizable(false);
 

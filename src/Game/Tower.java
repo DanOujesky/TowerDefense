@@ -1,9 +1,7 @@
 package Game;
 
-import ExterníZdroje.RotateImage;
 import javax.imageio.ImageIO;
 import java.awt.*;
-import java.awt.Window;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
@@ -223,19 +221,19 @@ public class Tower {
     public void rotateTower(double rotate) {
         switch (level) {
             case 1:
-                towerImage = RotateImage.rotateImage(towerImage,rotate);
+                towerImage = Enemy.rotateImage(towerImage,rotate);
                 break;
             case 2:
-                towerImageLevel2 = RotateImage.rotateImage(towerImageLevel2,rotate);
+                towerImageLevel2 = Enemy.rotateImage(towerImageLevel2,rotate);
                 break;
             case 3:
-                towerImageLevel3 = RotateImage.rotateImage(towerImageLevel3,rotate);
+                towerImageLevel3 = Enemy.rotateImage(towerImageLevel3,rotate);
                 break;
             case 4:
-                towerImageLevel4 = RotateImage.rotateImage(towerImageLevel4,rotate);
+                towerImageLevel4 = Enemy.rotateImage(towerImageLevel4,rotate);
                 break;
             case 5:
-                towerImageLevel5 = RotateImage.rotateImage(towerImageLevel5,rotate);
+                towerImageLevel5 = Enemy.rotateImage(towerImageLevel5,rotate);
                 break;
         }
     }
@@ -305,7 +303,11 @@ public class Tower {
      * @return
      */
     public boolean collisionWithMouse(){
-        return towerBounds.contains(MyMouseListener.positionX + 30, MyMouseListener.positionY + 30);
+        if (towerBounds.contains(MyMouseListener.positionX+30, MyMouseListener.positionY+30)){
+            return true;
+        } else {
+            return false;
+        }
     }
 
     /**

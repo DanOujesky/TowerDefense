@@ -1,7 +1,5 @@
 package Game;
 
-import Game.Background;
-
 import javax.swing.*;
 import java.awt.*;
 
@@ -25,16 +23,14 @@ public class GamePanel extends JPanel implements Runnable {
     CanonButton_1 canon = new CanonButton_1();
     static JButton speedButton = new JButton(new ImageIcon("pictures/Speed_icons/Speed_icon_1x.png"));
     MyMouseListener myMouseListener = new MyMouseListener();
-    MySpellButton mySpellButton;
+    MySpellButton mySpellButton = new MySpellButton();
 
-    MySpellButtonFreeze mySpellButtonFreeze;
+    MySpellButtonFreeze mySpellButtonFreeze = new MySpellButtonFreeze();
     Waves waves = new Waves();
     MyWaveButton myWaveButton;
     PlayButton playButton;
     SettingsButton settingsButton;
     ExitButton exitButton;
-    BackgroundButton backgroundButton1;
-    BackgroundButton backgroundButton2;
 
     /**
      * assign variables
@@ -60,7 +56,7 @@ public class GamePanel extends JPanel implements Runnable {
     /**
      * adds buttons and create object and start a new thread
      */
-    public void launchGame(String mapa){
+    public void launchGame(){
 
         this.addMouseListener(new MyMouseListener());
         this.setFocusable(true);
@@ -70,22 +66,21 @@ public class GamePanel extends JPanel implements Runnable {
         this.add(mySpellButton);
         this.add(mySpellButtonFreeze);
 
-        background = new Background(mapa);
+
+        background = new Background();
         towerManager = new TowerManager();
         enemyManager = new EnemyManager();
         bulletManager = new BulletManager();
         healthBar = new HealthBar(20);
-        coinBar = new CoinBar(18);
+        coinBar = new CoinBar(9999);
         myWaveButton = new MyWaveButton(waves);
-        mySpellButton =  new MySpellButton();
-        mySpellButtonFreeze = new MySpellButtonFreeze();
-        this.add(myWaveButton);
 
         speedButton.setBounds(800, 800, 60, 60);
         myWaveButton.setBorder(BorderFactory.createEmptyBorder());
         speedButton.setBorder(BorderFactory.createEmptyBorder());
         myWaveButton.setContentAreaFilled(false);
         speedButton.setContentAreaFilled(false);
+        this.add(myWaveButton);
 
         speedButton.addActionListener(new SpeedButtonListener());
 
@@ -160,6 +155,8 @@ public class GamePanel extends JPanel implements Runnable {
                 mySpellButton.resetColdDown();
             }
             waves.update();
+        } else if (waves.waveCount == 12){
+            waves.end();
         }
         myMouseListener.updatePositions();
     }
@@ -205,14 +202,4 @@ public class GamePanel extends JPanel implements Runnable {
 
     }
 
-    public void showBackgroundSelectionMenu() {
-        backgroundButton1 = new BackgroundButton(this, "MAPA 1");
-        backgroundButton2 = new BackgroundButton(this, "MAPA 2");
-
-    }
-
-    public void hideBackgroundSelectionMenu() {
-        backgroundButton1.setVisible(false);
-        backgroundButton2.setVisible(false);
-    }
 }
