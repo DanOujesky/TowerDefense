@@ -50,37 +50,37 @@ public class BulletManager {
             case "Tower_1":
                 switch (t.getLevel()) {
                     case 1:
-                        bullets.add(new Bullet(t.getX() - 30,t.getY()-30,xSpeed*10,ySpeed*10,t.getDamage(), rotate, new File("pictures/Bullets/Bullet_1.png")));
+                        bullets.add(new Bullet(t.getX() - 30,t.getY()-30,xSpeed*10,ySpeed*10,t.getDamage(), rotate, new File("TowerDefense/pictures/Bullets/Bullet_1.png")));
                         break;
                     case 2:
-                        bullets.add(new Bullet(t.getX() - 30,t.getY()-30,xSpeed*10,ySpeed*10,t.getDamage(), rotate, new File("pictures/Bullets/Bullet_2.png")));
+                        bullets.add(new Bullet(t.getX() - 30,t.getY()-30,xSpeed*10,ySpeed*10,t.getDamage(), rotate, new File("TowerDefense/pictures/Bullets/Bullet_2.png")));
                         break;
                     case 3:
-                        bullets.add(new Bullet(t.getX() - 30,t.getY()-30,xSpeed*10,ySpeed*10,t.getDamage(), rotate, new File("pictures/Bullets/Bullet_3.png")));
+                        bullets.add(new Bullet(t.getX() - 30,t.getY()-30,xSpeed*10,ySpeed*10,t.getDamage(), rotate, new File("TowerDefense/pictures/Bullets/Bullet_3.png")));
                         break;
                     case 4:
-                        bullets.add(new Bullet(t.getX() - 30,t.getY()-30,xSpeed*10,ySpeed*10,t.getDamage(), rotate, new File("pictures/Bullets/Bullet_4.png")));
+                        bullets.add(new Bullet(t.getX() - 30,t.getY()-30,xSpeed*10,ySpeed*10,t.getDamage(), rotate, new File("TowerDefense/pictures/Bullets/Bullet_4.png")));
                         break;
                     case 5:
-                        bullets.add(new Bullet(t.getX() - 30,t.getY()-30,xSpeed*10,ySpeed*10,t.getDamage(), rotate, new File("pictures/Bullets/Bullet_5.png")));
+                        bullets.add(new Bullet(t.getX() - 30,t.getY()-30,xSpeed*10,ySpeed*10,t.getDamage(), rotate, new File("TowerDefense/pictures/Bullets/Bullet_5.png")));
                         break;
                 }
             case "Canon_1" :
                 switch (t.getLevel()) {
                     case 1:
-                        bullets.add(new Bullet(t.getX() - 30,t.getY()-30,xSpeed*10,ySpeed*10,t.getDamage(), rotate, new File("pictures/Bullets/Bullet_1.png")));
+                        bullets.add(new Bullet(t.getX() - 30,t.getY()-30,xSpeed*10,ySpeed*10,t.getDamage(), rotate, new File("TowerDefense/pictures/Bullets/Bullet_1.png")));
                         break;
                     case 2:
-                        bullets.add(new Bullet(t.getX() - 30,t.getY()-30,xSpeed*10,ySpeed*10,t.getDamage(), rotate, new File("pictures/Bullets/Bullet_2.png")));
+                        bullets.add(new Bullet(t.getX() - 30,t.getY()-30,xSpeed*10,ySpeed*10,t.getDamage(), rotate, new File("TowerDefense/pictures/Bullets/Bullet_2.png")));
                         break;
                     case 3:
-                        bullets.add(new Bullet(t.getX() - 30,t.getY()-30,xSpeed*10,ySpeed*10,t.getDamage(), rotate, new File("pictures/Bullets/Bullet_3.png")));
+                        bullets.add(new Bullet(t.getX() - 30,t.getY()-30,xSpeed*10,ySpeed*10,t.getDamage(), rotate, new File("TowerDefense/pictures/Bullets/Bullet_3.png")));
                         break;
                     case 4:
-                        bullets.add(new Bullet(t.getX() - 30,t.getY()-30,xSpeed*10,ySpeed*10,t.getDamage(), rotate, new File("pictures/Bullets/Bullet_4.png")));
+                        bullets.add(new Bullet(t.getX() - 30,t.getY()-30,xSpeed*10,ySpeed*10,t.getDamage(), rotate, new File("TowerDefense/pictures/Bullets/Bullet_4.png")));
                         break;
                     case 5:
-                        bullets.add(new Bullet(t.getX() - 30,t.getY()-30,xSpeed*10,ySpeed*10,t.getDamage(), rotate, new File("pictures/Bullets/Bullet_5.png")));
+                        bullets.add(new Bullet(t.getX() - 30,t.getY()-30,xSpeed*10,ySpeed*10,t.getDamage(), rotate, new File("TowerDefense/pictures/Bullets/Bullet_5.png")));
                         break;
                 }
         }

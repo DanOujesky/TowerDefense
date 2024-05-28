@@ -36,7 +36,7 @@ public class MySpellButton extends JButton {
      */
     public MySpellButton() {
         try {
-            fireCircle = ImageIO.read(new File("pictures/Spells/Spell_fire_circle.png"));
+            fireCircle = ImageIO.read(new File("TowerDefense/pictures/Spells/Spell_fire_circle.png"));
         } catch (IOException e) {
             throw new RuntimeException(e);
         }

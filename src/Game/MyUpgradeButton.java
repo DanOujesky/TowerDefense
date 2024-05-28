@@ -6,8 +6,8 @@ import java.awt.*;
 import static javax.imageio.ImageIO.read;
 
 public class MyUpgradeButton extends JButton {
-    ImageIcon upgradeButtonImage = new ImageIcon("pictures/TowerMenu/upgradeButton.png");
-    ImageIcon upgradeButtonImageClicked = new ImageIcon("pictures/TowerMenu/upgradeButton_clicked.png");
+    ImageIcon upgradeButtonImage = new ImageIcon("TowerDefense/pictures/TowerMenu/upgradeButton.png");
+    ImageIcon upgradeButtonImageClicked = new ImageIcon("TowerDefense/pictures/TowerMenu/upgradeButton_clicked.png");
     int clickCount;
     Tower tower;
 

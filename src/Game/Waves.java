@@ -23,7 +23,7 @@ public class Waves {
     public void startWave(MyWaveButton myWaveButton){
         this.myWaveButton = myWaveButton;
         resetColdowns = true;
-        waveCount = 12;
+        waveCount++;
         CoinBar.COINS += 3;
         timer = 0;
         enemiesCount = 0;

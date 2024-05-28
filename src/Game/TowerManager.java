@@ -28,10 +28,10 @@ public class TowerManager {
         }
         switch (name) {
             case "Tower_1":
-                towers.add(new Tower(0,0,12,1,10,5, new File("pictures/Towers/Tower_1.png"), "Tower_1", 200));
+                towers.add(new Tower(0,0,12,1,10,5, new File("TowerDefense/pictures/Towers/Tower_1.png"), "Tower_1", 200));
                 break;
             case "Canon_1":
-                towers.add(new Tower(0,0,5,1,22,5, new File("pictures/Towers/Canon_1.png"), "Canon_1", 280));
+                towers.add(new Tower(0,0,5,1,22,5, new File("TowerDefense/pictures/Towers/Canon_1.png"), "Canon_1", 280));
                 break;
         }
         if (towers.get(towers.size()-1).getPrize() <=  CoinBar.COINS) {

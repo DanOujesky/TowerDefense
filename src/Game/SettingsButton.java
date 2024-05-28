@@ -7,7 +7,7 @@ import java.awt.*;
  * this clas represents setting button
  */
 public class SettingsButton extends JButton{
-    ImageIcon settingsButton = new ImageIcon("pictures/GameMenu/SettingsButton.png");
+    ImageIcon settingsButton = new ImageIcon("TowerDefense/pictures/GameMenu/SettingsButton.png");
 
     /**
      * assign values

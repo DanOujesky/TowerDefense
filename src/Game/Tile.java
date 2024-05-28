@@ -20,8 +20,8 @@ public class Tile {
      */
     static {
         try {
-            GRASS = ImageIO.read(new File("pictures/Tiles/GRASS.png"));
-            DIRT = ImageIO.read(new File("pictures/Tiles/DIRT.png"));
+            GRASS = ImageIO.read(new File("TowerDefense/pictures/Tiles/GRASS.png"));
+            DIRT = ImageIO.read(new File("TowerDefense/pictures/Tiles/DIRT.png"));
         } catch (IOException e) {
             throw new RuntimeException(e);
         }

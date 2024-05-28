@@ -7,7 +7,7 @@ import java.awt.*;
  * this class represents exit button
  */
 public class ExitButton extends JButton {
-    ImageIcon exitButton = new ImageIcon("pictures/GameMenu/ExitButton.png");
+    ImageIcon exitButton = new ImageIcon("TowerDefense/pictures/GameMenu/ExitButton.png");
 
     /**
      * assign variables

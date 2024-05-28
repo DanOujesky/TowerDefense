@@ -56,19 +56,19 @@ public class Tower {
         level = 1;
         if (name.equals("Tower_1")) {
             try {
-                towerImageLevel2 = ImageIO.read(new File("pictures/Towers/Tower_1(level2).png"));
-                towerImageLevel3 = ImageIO.read(new File("pictures/Towers/Tower_1(level3).png"));
-                towerImageLevel4 = ImageIO.read(new File("pictures/Towers/Tower_1(level4).png"));
-                towerImageLevel5 = ImageIO.read(new File("pictures/Towers/Tower_1(level5).png"));
+                towerImageLevel2 = ImageIO.read(new File("TowerDefense/pictures/Towers/Tower_1(level2).png"));
+                towerImageLevel3 = ImageIO.read(new File("TowerDefense/pictures/Towers/Tower_1(level3).png"));
+                towerImageLevel4 = ImageIO.read(new File("TowerDefense/pictures/Towers/Tower_1(level4).png"));
+                towerImageLevel5 = ImageIO.read(new File("TowerDefense/pictures/Towers/Tower_1(level5).png"));
             } catch (IOException e) {
                 throw new RuntimeException(e);
             }
         } else if (name.equals("Canon_1")) {
             try {
-                towerImageLevel2 = ImageIO.read(new File("pictures/Towers/Canon_1(level2).png"));
-                towerImageLevel3 = ImageIO.read(new File("pictures/Towers/Canon_1(level3).png"));
-                towerImageLevel4 = ImageIO.read(new File("pictures/Towers/Canon_1(level4).png"));
-                towerImageLevel5 = ImageIO.read(new File("pictures/Towers/Canon_1(level5).png"));
+                towerImageLevel2 = ImageIO.read(new File("TowerDefense/pictures/Towers/Canon_1(level2).png"));
+                towerImageLevel3 = ImageIO.read(new File("TowerDefense/pictures/Towers/Canon_1(level3).png"));
+                towerImageLevel4 = ImageIO.read(new File("TowerDefense/pictures/Towers/Canon_1(level4).png"));
+                towerImageLevel5 = ImageIO.read(new File("TowerDefense/pictures/Towers/Canon_1(level5).png"));
             } catch (IOException e) {
                 throw new RuntimeException(e);
             }

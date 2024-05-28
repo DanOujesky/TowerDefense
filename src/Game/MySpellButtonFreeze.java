@@ -9,10 +9,10 @@ public class MySpellButtonFreeze extends JButton {
 
 
 
-    ImageIcon mySpellButtonFreeze = new ImageIcon("pictures/Spells/Spell_freeze.png");
-    ImageIcon mySpellButtonFreezeClicked = new ImageIcon("pictures/Spells/Spell_freeze_clicked.png");
-    ImageIcon mySpellButtonFreezeLocked = new ImageIcon("pictures/Spells/Spell_freeze_locked.png");
-    ImageIcon mySpellButtonFreezeLockedColdown = new ImageIcon("pictures/Spells/Spell_freeze_locked_coldown.png");
+    ImageIcon mySpellButtonFreeze = new ImageIcon("TowerDefense/pictures/Spells/Spell_freeze.png");
+    ImageIcon mySpellButtonFreezeClicked = new ImageIcon("TowerDefense/pictures/Spells/Spell_freeze_clicked.png");
+    ImageIcon mySpellButtonFreezeLocked = new ImageIcon("TowerDefense/pictures/Spells/Spell_freeze_locked.png");
+    ImageIcon mySpellButtonFreezeLockedColdown = new ImageIcon("TowerDefense/pictures/Spells/Spell_freeze_locked_coldown.png");
     int clickCount;
     int timer;
     private boolean freezeWasUsed;
