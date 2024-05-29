@@ -8,7 +8,7 @@ import java.awt.*;
  */
 public class PlayButton extends JButton {
 
-    ImageIcon playButton = new ImageIcon("TowerDefense/pictures/GameMenu/PlayButton.png");
+    ImageIcon playButton = new ImageIcon("pictures/GameMenu/PlayButton.png");
 
     /**
      * assign values

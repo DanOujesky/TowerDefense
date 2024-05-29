@@ -7,8 +7,8 @@ import java.awt.*;
  * this class represents my sell button
  */
 public class MySellButton extends JButton {
-    ImageIcon sellButtonImage = new ImageIcon("TowerDefense/pictures/TowerMenu/sellButton.png");
-    ImageIcon sellButtonImageClicked = new ImageIcon("TowerDefense/pictures/TowerMenu/sellButton_clicked.png");
+    ImageIcon sellButtonImage = new ImageIcon("pictures/TowerMenu/sellButton.png");
+    ImageIcon sellButtonImageClicked = new ImageIcon("pictures/TowerMenu/sellButton_clicked.png");
     int clickCount;
     Tower tower;
 

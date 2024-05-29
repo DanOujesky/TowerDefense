@@ -27,19 +27,19 @@ public class EnemyManager {
     public static void addEnemy(String name){
         switch (name) {
             case "enemy1":
-                enemies.add(new Enemy(new File("TowerDefense/pictures/Enemies/Enemy_1.png"), 45,1,1, 1));
+                enemies.add(new Enemy(new File("pictures/Enemies/Enemy_1.png"), 45,1,1, 1));
                 break;
             case "enemy2":
-                enemies.add(new Enemy(new File("TowerDefense/pictures/Enemies/Enemy_2.png"), 25, 3,1,2));
+                enemies.add(new Enemy(new File("pictures/Enemies/Enemy_2.png"), 25, 3,1,2));
                 break;
             case "enemy3":
-                enemies.add(new Enemy(new File("TowerDefense/pictures/Enemies/Enemy_3.png"),  420,0.5,3, 3));
+                enemies.add(new Enemy(new File("pictures/Enemies/Enemy_3.png"),  420,0.5,3, 3));
                 break;
             case "enemy4":
-                enemies.add(new Enemy(new File("TowerDefense/pictures/Enemies/Enemy_4.png"),  2500,0.5,5, 5));
+                enemies.add(new Enemy(new File("pictures/Enemies/Enemy_4.png"),  2500,0.5,5, 5));
                 break;
             case "enemy5":
-                enemies.add(new Enemy(new File("TowerDefense/pictures/Enemies/Enemy_5.png"),  6000,0.5,5, 7));
+                enemies.add(new Enemy(new File("pictures/Enemies/Enemy_5.png"),  6000,0.5,5, 7));
                 break;
         }
     }

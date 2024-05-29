@@ -6,7 +6,7 @@ import javax.swing.*;
  * this class represents Canon button
  */
 public class CanonButton_1 extends JButton{
-    ImageIcon imageIcon = new ImageIcon("TowerDefense/pictures/TowerButtons/TowerButton_2.png");
+    ImageIcon imageIcon = new ImageIcon("pictures/TowerButtons/TowerButton_2.png");
 
     /**
      * assign all variables

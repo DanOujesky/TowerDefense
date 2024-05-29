@@ -21,7 +21,7 @@ public class GamePanel extends JPanel implements Runnable {
     CoinBar coinBar;
     TowerButton_1 tower1 = new TowerButton_1();
     CanonButton_1 canon = new CanonButton_1();
-    static JButton speedButton = new JButton(new ImageIcon("TowerDefense/pictures/Speed_icons/Speed_icon_1x.png"));
+    static JButton speedButton = new JButton(new ImageIcon("pictures/Speed_icons/Speed_icon_1x.png"));
     MyMouseListener myMouseListener = new MyMouseListener();
     MySpellButton mySpellButton;
 
